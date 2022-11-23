@@ -34,7 +34,7 @@ This is a computer-architecture assignment implements a set associative cache si
     $ ./{relative_path}/test.sh -s {cache_size} -b {block_size} -a {associative_size} -d {tracefile_directory}
 ```
 
-- tracefile_direcyory
+- tracefile_directory
   ![screensh](./img/tracefile_dir.png)
   it must include varity type of trace file to simulate
 
