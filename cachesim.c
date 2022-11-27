@@ -79,7 +79,7 @@ cache_line *cache;
  */
 typedef struct main_memory_line_
 {
-    int addr;
+    unsigned int addr;
     int check_sum;
     one_word *data;
 } main_memory_line;
@@ -88,17 +88,19 @@ typedef struct main_memory_line_
 // !MAIN MEMORY
 main_memory_line *main_memory;
 
-void write_cache(int addr, one_word data);
-void read_cache(int addr);
+void write_cache(unsigned int addr, one_word data);
+void read_cache(unsigned int addr);
 
 void save_MM(cache_line *cache_line_ptr);
-void read_MM(int addr, cache_line *cache_line_ptr);
+void read_MM(unsigned int addr, cache_line *cache_line_ptr);
 
-void writeProcess(int addr, int data, cache_line *cache_line_ptr);
-void readProcess(int addr, cache_line *cache_line_ptr);
+void writeProcess(unsigned addr, int data, cache_line *cache_line_ptr);
+void readProcess(unsigned addr, cache_line *cache_line_ptr);
 
 void print_cache();
 void print_mm();
+
+void free_process();
 
 int main(int ac, char *av[])
 {
@@ -166,7 +168,8 @@ int main(int ac, char *av[])
      */
 
     // addr is 32bit -> 4byte -> int is 4byte
-    int addr, temp_write_data;
+    unsigned int addr;
+    int temp_write_data;
     char memory_access_type;
     while (fscanf(tracefile_fp, "%8x %c", &addr, &memory_access_type) != EOF)
     {
@@ -192,12 +195,24 @@ int main(int ac, char *av[])
     }
 
     print_cache();
+
+    /**
+     * @brief
+     * 1. free cache all data
+     * 2. free main memory all data
+     * 3. free cache
+     * 4. free main memory
+     * 5. close tracefile
+     */
+    free_process();
+
     return 0;
 }
 
-void write_cache(int addr, one_word data)
+void write_cache(unsigned int addr, one_word data)
 {
-    int index, associative_offset, entry_set_offset, temp_write_data, tag, data_offset, cache_line_offset;
+    int associative_offset, entry_set_offset, temp_write_data, data_offset, cache_line_offset;
+    unsigned index, tag;
     cache_line *cache_line_ptr;
 
     // (00000000 00000001 00000000 00)=tag (001)=index (000)=byte offset W 33
@@ -278,9 +293,10 @@ void write_cache(int addr, one_word data)
     }
 }
 
-void read_cache(int addr)
+void read_cache(unsigned int addr)
 {
-    int index, associative_offset, entry_set_offset, cache_line_offset;
+    unsigned int index;
+    int associative_offset, entry_set_offset, cache_line_offset;
     cache_line *cache_line_ptr;
 
     index = (addr / block_size) % set_num;
@@ -349,7 +365,8 @@ void read_cache(int addr)
 void save_MM(cache_line *cache_line_ptr)
 {
     // we have to know address
-    int memory_line, evict_addr;
+    unsigned int evict_addr;
+    int memory_line;
     evict_addr = (cache_line_ptr->addr / block_size);
 
     // printf("save_MM >> (%08X) \n", cache_line_ptr->addr);
@@ -384,9 +401,10 @@ void save_MM(cache_line *cache_line_ptr)
     }
 }
 
-void read_MM(int addr, cache_line *cache_line_ptr)
+void read_MM(unsigned int addr, cache_line *cache_line_ptr)
 {
-    int memory_line, target_addr;
+    unsigned int target_addr;
+    int memory_line;
     target_addr = addr / block_size;
 
     // printf("read_MM >> (%08X) \n", addr);
@@ -406,9 +424,10 @@ void read_MM(int addr, cache_line *cache_line_ptr)
     memset(cache_line_ptr->data, 0, sizeof(one_word) * word_num);
 }
 
-void writeProcess(int addr, int data, cache_line *cache_line_ptr)
+void writeProcess(unsigned int addr, int data, cache_line *cache_line_ptr)
 {
-    int tag, data_offset;
+    unsigned int tag;
+    int data_offset;
 
     tag = ((addr / block_size) / set_num);
     data_offset = ((addr / ONE_BYTE_SIZE) % word_num);
@@ -428,7 +447,7 @@ void writeProcess(int addr, int data, cache_line *cache_line_ptr)
     (cache_line_ptr->data)[data_offset] = data;
 }
 
-void readProcess(int addr, cache_line *cache_line_ptr)
+void readProcess(unsigned int addr, cache_line *cache_line_ptr)
 {
     cache_line_ptr->dirty = 0;
     cache_line_ptr->valid = 1;
@@ -483,6 +502,7 @@ void print_cache()
     // print_mm();
 }
 
+/*
 void print_mm()
 {
     int memory_line, data_index;
@@ -499,4 +519,21 @@ void print_mm()
         if (main_memory[memory_line].check_sum == 1)
             break;
     }
+}
+*/
+
+void free_process()
+{
+    int i;
+
+    for (i = 0; i < block_size / ONE_WORD_SIZE; i++)
+        free(cache[i].data);
+
+    for (i = 0; i < INITIAL_BUFFER_SIZE; i++)
+        free(main_memory[i].data);
+
+    free(cache);
+    free(main_memory);
+
+    fclose(tracefile_fp);
 }
