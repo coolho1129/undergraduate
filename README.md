@@ -176,3 +176,19 @@ This is a computer-architecture assignment implements a set associative cache si
 
   ----------------------------------------
   ```
+
+---
+
+### Roles
+
+<code>hyunseo Lee (이현서)</code>
+
+- Algorithmic design
+- Create Initial Code
+- Coding the test case simulator
+
+<code>Chanho Kim (김찬호)</code>
+
+- Algorithm improvement
+- Code correction
+- Bug Detection and Fixation

@@ -1,6 +1,7 @@
 /**
  * @file cachesim.c
  * @author hyunseo lee (heart20021010@gmail.com)
+ * @author Chanho Kim (coolho123@naver.com)
  * @brief cache simulator for computer architecture assignment 2022
  * @version 0.1
  * @date 2022-11-18
