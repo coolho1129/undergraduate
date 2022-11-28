@@ -1,7 +1,7 @@
 /**
  * @file cachesim.c
- * @author hyunseo lee (heart20021010@gmail.com)
- * @author Chanho Kim (coolho123@naver.com)
+ * @author hyunseo lee 2021113490 (heart20021010@gmail.com)
+ * @author Chanho Kim 2021114818 (coolho123@naver.com)
  * @brief cache simulator for computer architecture assignment 2022
  * @version 0.1
  * @date 2022-11-18
@@ -476,7 +476,7 @@ void print_cache()
         for (associative_offset = 0; associative_offset < associative_size; associative_offset++)
         {
             if (associative_offset != 0)
-                printf("  ");
+                printf("   ");
 
             if ((cache_line_ptr = cache + (cache_line_offset + associative_offset))->dirty)
                 total_dirty++;
@@ -494,7 +494,7 @@ void print_cache()
     average_memory_access_cycle = (double)(memory_access_count * MISS_PENALTY_CYCLE + (total_hit + total_miss) * HIT_CYCLE) / (total_hit + total_miss);
 
     // printf("mac >> %d\n", memory_access_count);
-    printf("\ntotal number of hits: %d\n", total_hit);
+    printf("total number of hits: %d\n", total_hit);
     printf("total number of misses: %d\n", total_miss);
     printf("miss rate: %.1f%%\n", miss_rate);
     printf("total number of dirty blocks: %d\n", total_dirty);
