@@ -37,7 +37,7 @@
 
 예)
 
-# 2+3x17-38/2=
+2+3x17-38/2=
 
 2+3x17-38/2=
 
@@ -70,6 +70,8 @@ java -jar rars_5f747b9.jar
  
 
 성공적으로 emulator를 실행하면 다음과 같은 창이 뜬다.
+![image](https://user-images.githubusercontent.com/105068708/209697648-79a17669-14d0-4d19-a380-37307a0469fd.png)
+
 
 
 
