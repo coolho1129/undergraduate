@@ -1,11 +1,11 @@
 # RISC-V
-#2022 탁병철 컴퓨터 구조  과제1 RISC - V 계산기 
+# 2022 탁병철 컴퓨터 구조  과제1 RISC - V 계산기 
 
 본 과제에서는 RISC-V 어셈블리 언어를 사용하여 아래의 요구조건을 만족하는 어셈블리 프로그램을 작성한다.
 
  
 
-#요구기능
+# 요구기능
 
 프로그램을 실행하면 사용자의 입력을 받을 때까지 대기한다.
 
@@ -36,7 +36,7 @@
 
  
 
-#프로그래밍 환경
+# 프로그래밍 환경
 
 옆의 첨부된 RISC-V emulator를 사용한다.  rars_5f747b9.jar  
 
@@ -95,10 +95,10 @@ https://github.com/TheThirdOne/rars/wiki/Environment-Calls (외부 사이트로 
 https://github.com/TheThirdOne/rars/tree/master/examples (외부 사이트로 연결합니다.)
 
  
-
  
-
-#채점기준
+ 
+ 
+ # 채점기준
 
 구현은 다음의 단계로 나누어지므로 각 단계를 완성하면 단계별 점수를 부여한다.
 
@@ -124,7 +124,7 @@ https://github.com/TheThirdOne/rars/tree/master/examples (외부 사이트로 �
 
  
 
-#채점방식
+# 채점방식
 
  
 
@@ -140,7 +140,7 @@ asm파일을 edit창에 로드해서 곧바로 실행할 것임.
 
  
 
-#제출방식
+# 제출방식
 
  
 
@@ -157,7 +157,7 @@ asm파일을 edit창에 로드해서 곧바로 실행할 것임.
  
 
  
-#부정행위 관련
+# 부정행위 관련
 
  
 
