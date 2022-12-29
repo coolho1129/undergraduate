@@ -24,7 +24,6 @@ int gcd(int a, int b)
 		max = a;
 	}
 	else
-		;
 	{
 		max = b;
 	}
