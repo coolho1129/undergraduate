@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -12,6 +11,8 @@ struct rationalnum
 	char div;
 	int numer;
 };
+
+int compare(struct rationalnum ration1, struct rationalnum ration2);
 void main()
 {
 	struct rationalnum ration1;
@@ -20,14 +21,19 @@ void main()
 	struct rationalnum ration2;
 	scanf("%d%c%d", &ration2.numer, &ration2.div, &ration2.deno);
 
+	printf("%d", compare(ration1, ration2));
+}
+
+int compare(struct rationalnum ration1, struct rationalnum ration2)
+{
 	if (((double)ration1.numer / ration1.deno) == ((double)ration2.numer / ration2.deno))
 	{
-		printf("%d", 0);
+		return 0;
 	}
 	else if (((double)ration1.numer / ration1.deno) > ((double)ration2.numer / ration2.deno))
 	{
-		printf("%d", -1);
+		return -1;
 	}
 	else
-		printf("%d", 1);
+		return 1;
 }
