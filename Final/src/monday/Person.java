@@ -5,17 +5,17 @@ import javax.swing.*;
 //2021114818
 //김찬호
 
-public class Person2 extends Thread{
-	KtxSeat2 callback;
+public class Person extends Thread{
+	KtxSeat callback;
 	String threadName,seatName,change;
-	KtxReservationApp2 gui;
+	KtxReservationApp gui;
 	int row,col;
 	String seat[][]= new String[4][10];
 	
 			
 			
 	
-	public Person2(KtxSeat2 obj,String name) {
+	public Person(KtxSeat obj,String name) {
 		this.callback=obj;
 		this.threadName=name;
 	}
