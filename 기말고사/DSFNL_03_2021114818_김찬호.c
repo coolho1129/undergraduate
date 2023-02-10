@@ -2,76 +2,98 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define SWAP(a,b,t){t=a;a=b;b=t;}
-#define MAX 10000
-#define HEAP_FULL(n)(n==MAX-1)
-#define  HEAP_EMPTY(n)(!n)
-
-typedef struct element {
-	int key;
-}element;
-element heap[MAX];
-
-void push(element item, int* n) {
-	int i;
-	if (HEAP_FULL(*n)) {
-		fprintf(stderr, "THE HEAP IS FULL");
-		exit(EXIT_FAILURE);
-	}
-
-	i = ++(*n);
-	while (i != 1 && item.key < heap[i / 2].key) {
-		heap[i] = heap[i / 2];
-		i /= 2;
-	}
-	heap[i] = item;
-
-}
-
-int getheight(int index) {
-	int left = 0, right = 0;
-	if (heap[2 * index].key) {
-
-		left += getheight(2 * index);
-	}
-	else if (heap[2 * index + 1].key)
-		right += getheight(2 * index + 1);
+#include<math.h>
+#define MAX 1001
 
 
-	return 1 + ((left >= right) ? left : right);
 
-}
-
-int count_leaf(int n) {
-	int count = 0;
-	for (int i = 1; i <= n; i++) {
-		if (heap[2 * i].key == 0 && heap[2 * i + 1].key == 0) {
-			count++;
-		}
-	}
-	return count;
-
-}
-void levelorder(int n) {
-	printf("Level Order: ");
-	for (int i = 1; i <= n; i++) {
-		printf("%d ", heap[i].key);
+int winner[MAX];
+int loser[MAX];
+void levelorder(int height) {
+	printf("Winner Tree Level Order: ");
+	for (int i = 1;i < pow(2,height);i++) {
+		printf("%d ", winner[i]);
 	}
 	puts("");
+	printf("Loser Tree Level Order: ");
+	for (int i = 1;i < pow(2, height);i++) {
+		printf("%d ", loser[i]);
+	}
+}
+
+
+int run[MAX];
+void makeWinnertree(int height) {
+	int low = height - 1;
+	int j = 0;
+	int start = pow(2, low), end = pow(2, height);
+
+	for (int i = start;i < end;i++) {
+		winner[i] = run[j];
+		//printf("%d ", winner[i]);
+		j++;
+	}
+	
+	while (height) {
+	
+		for (int i = start;i < end;i+=2) {
+			winner[i / 2] = ((winner[i] <= winner[i + 1]) ? winner[i] : winner[i + 1]);
+			//printf("%d ", winner[i / 2]);
+		}
+		height--;
+		low = height - 1;
+		start = pow(2, low), end = pow(2, height);
+	
+	}
+}
+
+void makelosertree(int height) {
+	int low = height - 1;
+	int j = 0;
+	int start = (int)pow(2, low), end = (int)pow(2, height);
+
+	for (int i = start;i < end;i++) {
+		loser[i] = winner[i];
+
+	}
+
+	for (int i = start;i < end;i += 2) {
+		loser[i / 2] = ((winner[i] >= winner[i + 1]) ? winner[i] : winner[i + 1]);
+
+	}
+		while (height) {
+
+			for (int i = start;i < end;i += 2) {
+				loser[i / 2] = ((winner[i] >= winner[i + 1]) ? winner[i] : winner[i + 1]);
+				
+
+			}
+			height--;
+			low = height - 1;
+			start = pow(2, low), end = pow(2, height);
+
+		}
+	
 }
 int main() {
 	FILE* f = fopen("input.txt", "r");
-	int n = 0;
-	element item;
-	while (fscanf(f, "%d", &item.key) != EOF) {
-		push(item, &n);
+	int n = 0, m;
+	fscanf(f, "%d %d", &n, &m);
+	int height = 0;
+	int temp = n;
+	while (temp) {
+		temp /= 2;
+		height++;
 	}
 
-	levelorder(n);
-	//printf("\n%d", n);
-	printf("Height: %d\n", getheight(1));
-	count_leaf(getheight(1));
-	printf("Leaf: %d", count_leaf(n));
+	//printf("%d ", height);
 
+	for (int i = 0;i < n;i++) {
+		fscanf(f,"%d", &run[i]);
+
+	}
+	makeWinnertree(height);
+	makelosertree(height);
+	printf("Winner: %d\n", winner[1]);
+	levelorder(m);
 }
-
