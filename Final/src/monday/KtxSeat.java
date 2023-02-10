@@ -1,11 +1,12 @@
+package monday;
 import java.awt.Color;
 
 //2021114818
 //김찬호
-public class KtxSeat2 {
+public class KtxSeat {
 	int [][] seats =new int [4][10];
 	String [][]owner=new String[4][10];
-	KtxReservationApp2 gui;
+	KtxReservationApp gui;
 	int count=0;
 	
 	public int reserveSeat(String seatName,String threadName,int findrow,int findcol) {
@@ -88,11 +89,11 @@ public class KtxSeat2 {
 
 	}
 
-	public void setGUI(KtxReservationApp2 gui) {
+	public void setGUI(KtxReservationApp gui) {
 		this.gui=gui;
 	}
 	
-	public KtxReservationApp2 getGUI() {
+	public KtxReservationApp getGUI() {
 		return this.gui;
 	}
 

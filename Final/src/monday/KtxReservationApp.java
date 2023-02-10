@@ -1,14 +1,21 @@
+package monday;
 //2021114818
 //김찬호
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
+
+
+
+
 public class KtxReservationApp extends JFrame {
-	KtxSeat ktxseat=new KtxSeat();
+	KtxSeat ktxseat2=new KtxSeat();
 	JLabel label =new JLabel("KTX 좌석 현황");
-	JLabel seat[][]=new JLabel[4][10];
+	ArrayList <ArrayList<JLabel>> seat = new ArrayList <ArrayList<JLabel>>();
 	JPanel panel=new JPanel();
 	JButton bt =new JButton("예약 시작");
 	
@@ -33,19 +40,20 @@ public class KtxReservationApp extends JFrame {
 		c.add(panel,BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(4,10,1,1));
 		for(int i=0;i<4;i++) {
+			seat.add(new ArrayList<JLabel>());
 			for(int j=0;j<10;j++) {
 				String seatNum=String.format("%d%c",j+1,'D'- i);
-				seat[i][j]=new JLabel(seatNum);
-				seat[i][j].setOpaque(true);
-				seat[i][j].setHorizontalAlignment(JLabel.CENTER);
-				seat[i][j].setBackground(Color.WHITE);
-				panel.add(seat[i][j]);
+				seat.get(i).add(new JLabel(seatNum));
+				seat.get(i).get(j).setOpaque(true);
+				seat.get(i).get(j).setHorizontalAlignment(JLabel.CENTER);
+				seat.get(i).get(j).setBackground(Color.WHITE);
+				panel.add(seat.get(i).get(j));
 			}
 		}
 		
 	
 		
-		ktxseat.setGUI(this);
+		ktxseat2.setGUI(this);
 		c.add(bt,BorderLayout.SOUTH);
 		setSize(750,250); 
 		setVisible(true);
@@ -57,22 +65,23 @@ public class KtxReservationApp extends JFrame {
 		public void actionPerformed(ActionEvent e) { 
 			
 			
-			new Person(ktxseat,"p1").start();
-			new Person(ktxseat,"p2").start();
-			new Person(ktxseat,"p3").start();
-			new Person(ktxseat,"p4").start();
-			new Person(ktxseat,"p5").start();
-			new Person(ktxseat,"p6").start();
+			new Person(ktxseat2,"p1").start();
+			new Person(ktxseat2,"p2").start();
+			new Person(ktxseat2,"p3").start();
+			new Person(ktxseat2,"p4").start();
+			new Person(ktxseat2,"p5").start();
+			new Person(ktxseat2,"p6").start();
 			
-			new Person(ktxseat,"police1").start();
-			new Person(ktxseat,"police2").start();
+			new Person(ktxseat2,"police1").start();
+			new Person(ktxseat2,"police2").start();
 			
-			new Person(ktxseat,"broker1").start();
-			new Person(ktxseat,"broker2").start();
+			new Person(ktxseat2,"broker1").start();
+			new Person(ktxseat2,"broker2").start();
 		
 		}
 	}
 	
+
 	
 	
 	public static void main(String[] args) {

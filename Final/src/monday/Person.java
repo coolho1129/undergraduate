@@ -1,27 +1,28 @@
+package monday;
 import java.awt.*;
 import javax.swing.*;
 
 //2021114818
 //김찬호
 
-public class Person extends Thread{
-	KtxSeat callback;
+public class Person2 extends Thread{
+	KtxSeat2 callback;
 	String threadName,seatName,change;
-	KtxReservationApp gui;
+	KtxReservationApp2 gui;
 	int row,col;
 	String seat[][]= new String[4][10];
 	
 			
 			
 	
-	public Person(KtxSeat obj,String name) {
+	public Person2(KtxSeat2 obj,String name) {
 		this.callback=obj;
 		this.threadName=name;
 	}
 	
 	public void run() {
 		
-		for(int i=0;i<20;i++) {
+		for(;;) {
 			
 			selectThread();
 			try {
@@ -30,10 +31,12 @@ public class Person extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+			if(callback.colorYellow()==40) {
+				System.out.println(threadName+"종료");
+				break;
+			}
 		}
-		System.out.println(threadName+"종료");
+		
 	}
 	
 	
@@ -49,19 +52,19 @@ public class Person extends Thread{
 		Thread.yield();
 		gui=callback.getGUI();
 		if(threadName.contains("police")) {
-			if(gui.seat[row][col].getText().contains("broker")&&callback.cancelSeat(seatName,threadName,row,col)==0) {
+			if(gui.seat.get(row).get(col).getText().contains("broker")&&callback.cancelSeat(seatName,threadName,row,col)==0) {
 				change=seatName+"("+threadName+")";
-				gui.seat[row][col].setText(change);
-				gui.seat[row][col].setBackground(Color.GREEN);
-				gui.seat[row][col].setHorizontalAlignment(JLabel.CENTER);
+				gui.seat.get(row).get(col).setText(change);
+				gui.seat.get(row).get(col).setBackground(Color.GREEN);
+				gui.seat.get(row).get(col).setHorizontalAlignment(JLabel.CENTER);
 			}
 		}
 		else if(threadName.contains("broker")) {
 			if(callback.reserveSeat(seatName,threadName,row,col)==0) {
 				change=seatName+"("+threadName+")";
-				gui.seat[row][col].setText(change);
-				gui.seat[row][col].setBackground(Color.RED);
-				gui.seat[row][col].setHorizontalAlignment(JLabel.CENTER);
+				gui.seat.get(row).get(col).setText(change);
+				gui.seat.get(row).get(col).setBackground(Color.RED);
+				gui.seat.get(row).get(col).setHorizontalAlignment(JLabel.CENTER);
 				
 			}
 			
@@ -70,15 +73,17 @@ public class Person extends Thread{
 		else {
 			if(callback.reserveSeat(seatName,threadName,row,col)==0) {
 				change=seatName+"("+threadName+")";
-				gui.seat[row][col].setText(change);
-				gui.seat[row][col].setBackground(Color.YELLOW);
-				gui.seat[row][col].setHorizontalAlignment(JLabel.CENTER);
+				gui.seat.get(row).get(col).setText(change);
+				gui.seat.get(row).get(col).setBackground(Color.YELLOW);
+				gui.seat.get(row).get(col).setHorizontalAlignment(JLabel.CENTER);
 				
 			}
 			
 		}
 		
 	}
+	
+	
 	
 
 
