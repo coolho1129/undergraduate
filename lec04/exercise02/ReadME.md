@@ -7,6 +7,7 @@
 ![lec04_sw_실습-21](https://user-images.githubusercontent.com/105068708/218277163-458d1143-dfd7-44ca-a607-30291bc26314.jpg)
 ![lec04_sw_실습-22](https://user-images.githubusercontent.com/105068708/218277165-096013d8-206d-48e5-bbd9-6c346f8b26e9.jpg)
 ![lec04_sw_실습-23](https://user-images.githubusercontent.com/105068708/218277167-c47d2b24-2746-4c90-b8b5-b19812fc9e03.jpg)
+# ※예시 출력 값 음속 : 337.0 m/s로 수정 
 ![lec04_sw_실습-24](https://user-images.githubusercontent.com/105068708/218277169-7816c5fd-da2a-408a-afd1-939080ddead5.jpg)
 ![lec04_sw_실습-25](https://user-images.githubusercontent.com/105068708/218277170-d0a94596-a7cb-472f-a9b4-12c0ad9d3452.jpg)
 ![lec04_sw_실습-26](https://user-images.githubusercontent.com/105068708/218277171-51292894-0af3-4fdb-bfb5-b3e2825c960f.jpg)
