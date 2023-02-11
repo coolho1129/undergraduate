@@ -7,7 +7,7 @@
 ![lec09_sw_실습-07](https://user-images.githubusercontent.com/105068708/218277993-948ff36f-88dc-4733-a01e-421902453e50.jpg)
 ![lec09_sw_실습-08](https://user-images.githubusercontent.com/105068708/218277994-23762f64-d397-4eb1-8072-2a7fc73a803f.jpg)
 
-# \#01!
+# \#01
 ![lec09_sw_실습-09](https://user-images.githubusercontent.com/105068708/218277958-6b168d0f-0950-4d6e-bc8d-d3932d4133c2.jpg)
 
 
