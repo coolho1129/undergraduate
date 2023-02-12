@@ -6,9 +6,8 @@
 ![lec10_sw_실습-14](https://user-images.githubusercontent.com/105068708/218300798-180d3f6e-aa2d-45fa-ac1e-29d723c15e88.jpg)
 # #04
 ![lec10_sw_실습-15](https://user-images.githubusercontent.com/105068708/218300800-963b757c-89ea-438c-86ee-ecb2c99a5ec0.jpg)
-# #05
 ![lec10_sw_실습-16](https://user-images.githubusercontent.com/105068708/218300802-733ca141-d9f4-47e8-93f4-fb20a8139184.jpg)
-# #06
+# #05
 ![lec10_sw_실습-17](https://user-images.githubusercontent.com/105068708/218300804-e4026b8f-fb6c-477e-b69e-03bb9d52d330.jpg)
 # #06
 ![lec10_sw_실습-18](https://user-images.githubusercontent.com/105068708/218300806-87603734-745a-4171-87d1-b7e08f868380.jpg)
