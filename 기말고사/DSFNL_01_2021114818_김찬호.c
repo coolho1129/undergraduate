@@ -45,7 +45,9 @@ int getheight(int index)
 		left = getheight(2 * index);
 	}
 	else if (heap[2 * index + 1].key)
+	{
 		right = getheight(2 * index + 1);
+	}
 
 	return 1 + ((left >= right) ? left : right);
 }
