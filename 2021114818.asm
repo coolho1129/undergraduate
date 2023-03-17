@@ -42,7 +42,7 @@ MAIN:
 	
 	# input equation
 	la 	a0, equation
-	lI 	a1, MAXBUFFER
+	li 	a1, MAXBUFFER
 	li 	a7, 8
 	ecall
 	
@@ -66,12 +66,6 @@ LOOP:
 	#split char
 	add 	s1, s0, s6
 	lb 	s2, 0(s1)
-	
-
-	# split char test print
-	#add 	a0, s2, zero
-	#li 	a7, 11
-	#ecall
 	
 	#save former operator
 	add 	a4, zero, t2
