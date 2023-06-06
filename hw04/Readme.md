@@ -1,0 +1,6 @@
+![4 DNS_소켓옵션-12](https://github.com/CoolHo1129/Network-Programming/assets/105068708/bffd9166-3023-4644-a467-5e8fa35caf84)
+![4 DNS_소켓옵션-13](https://github.com/CoolHo1129/Network-Programming/assets/105068708/de792e79-b364-43a0-bc28-fec168e6f563)
+![4 DNS_소켓옵션-14](https://github.com/CoolHo1129/Network-Programming/assets/105068708/c2053b94-8094-4320-9b12-20a1f9477570)
+![4 DNS_소켓옵션-15](https://github.com/CoolHo1129/Network-Programming/assets/105068708/ab76b59c-d717-465b-883c-8fa6d47087af)
+![4 DNS_소켓옵션-16](https://github.com/CoolHo1129/Network-Programming/assets/105068708/cff8034b-9d93-4459-8c17-bf3c5df8c20d)
+![4 DNS_소켓옵션-17](https://github.com/CoolHo1129/Network-Programming/assets/105068708/6d0490ba-9c6d-467e-8086-b5fc13215d79)
