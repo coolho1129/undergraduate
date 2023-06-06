@@ -1,0 +1,5 @@
+![5 다중프로세스기반서버-19](https://github.com/CoolHo1129/Network-Programming/assets/105068708/497d2404-462a-4b31-8ff3-67b2ffbd2751)
+![5 다중프로세스기반서버-20](https://github.com/CoolHo1129/Network-Programming/assets/105068708/b666fc69-a50e-473e-8721-924c93b544dc)
+![5 다중프로세스기반서버-21](https://github.com/CoolHo1129/Network-Programming/assets/105068708/166ca460-275e-4350-9dea-faa713c8bf8a)
+![5 다중프로세스기반서버-22](https://github.com/CoolHo1129/Network-Programming/assets/105068708/d986bfbb-a133-4387-94af-193051e3b65c)
+![5 다중프로세스기반서버-23](https://github.com/CoolHo1129/Network-Programming/assets/105068708/c10e6118-5e74-476c-8afa-391fd4c778b1)
