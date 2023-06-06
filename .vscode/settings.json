@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"inet.h": "c",
+		"sys_errlist.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
+}
