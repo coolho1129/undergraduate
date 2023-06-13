@@ -11,7 +11,7 @@
 typedef struct node* nodePointer;
 typedef struct node {
 	int vertex;
-	nodePointer link;`
+	nodePointer link;
 
 
 }node;
