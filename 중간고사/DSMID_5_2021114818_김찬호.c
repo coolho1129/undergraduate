@@ -123,7 +123,6 @@ void main()
 	for (int i = 0; i < N; i++)
 	{
 		fscanf(f2, "%d %d", &coef, &expon);
-
 		poly2 = append(poly2, coef, expon);
 	}
 

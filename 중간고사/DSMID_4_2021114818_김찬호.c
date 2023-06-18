@@ -7,11 +7,9 @@
 
 typedef struct
 {
-
 	int top;
 	int capacity;
 	int *data;
-
 } stack;
 
 init_stack(stack *s)
@@ -23,13 +21,11 @@ init_stack(stack *s)
 
 int isFull(stack *s)
 {
-
 	return (s->top == (s->capacity - 1));
 }
 
 int isEmpty(stack *s)
 {
-
 	return (s->top == -1);
 }
 

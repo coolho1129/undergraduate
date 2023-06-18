@@ -7,7 +7,6 @@
 
 void printResult(char result[])
 {
-
 	int len = strlen(result);
 
 	for (int i = len - 1; i > 0; i--)
