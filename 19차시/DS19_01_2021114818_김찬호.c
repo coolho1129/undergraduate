@@ -13,10 +13,7 @@ typedef struct node
 {
 	int vertex;
 	nodePointer link;
-<<<<<<< HEAD
 } node;
-=======
->>>>>>> de32d14c5ae3c6231ae6f20b1bd18f9db1441357
 
 typedef struct
 {
@@ -66,7 +63,6 @@ void topSort(hdnodes graph[], int n)
 
 	for (int i = 0; i < n; i++)
 	{
-
 		if (top == -1)
 		{
 			fprintf(stderr, "\nNetworks has a cycle. Sort termindeate. \n");
