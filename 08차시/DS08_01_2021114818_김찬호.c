@@ -1,20 +1,33 @@
-#define _CRT_SECURE_NO_WARNINGS 
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 
 int stack[101];
 int capacity = -1;
 int top = -1;
-int isp[] = { 0,19,12,12,13,13,13,0 };
-int icp[] = { 20,19,12,12,13,13,13,0 };
+int isp[] = {0, 19, 12, 12, 13, 13, 13, 0};
+int icp[] = {20, 19, 12, 12, 13, 13, 13, 0};
 
-typedef enum { lparen, rparen, plus, minus, times, divide, mod, eos, operand } precedence;
+typedef enum
+{
+    lparen,
+    rparen,
+    plus,
+    minus,
+    times,
+    divide,
+    mod,
+    eos,
+    operand
+} precedence;
 
-precedence getToken(char symbol) {
-    switch (symbol) {
+precedence getToken(char symbol)
+{
+    switch (symbol)
+    {
     case '(':
         return lparen;
     case ')':
@@ -23,11 +36,11 @@ precedence getToken(char symbol) {
         return plus;
     case '-':
         return minus;
-    case'/':
+    case '/':
         return divide;
-    case'*':
+    case '*':
         return times;
-    case'%':
+    case '%':
         return mod;
     case ' ':
         return eos;
@@ -36,8 +49,10 @@ precedence getToken(char symbol) {
     }
 }
 
-char changeToken(precedence token) {
-    switch (token) {
+char changeToken(precedence token)
+{
+    switch (token)
+    {
     case lparen:
         return '(';
     case rparen:
@@ -57,63 +72,74 @@ char changeToken(precedence token) {
     }
 }
 
-void push(int item) {
+void push(int item)
+{
     stack[++top] = item;
 }
 
-int pop() {
+int pop()
+{
     return stack[top--];
 }
 
-void Posfix(char* infix, char* postfix) {
+void Posfix(char *infix, char *postfix)
+{
 
     int inow = 0;
     int pnow = 0;
     int len = strlen(infix);
     push(eos);
 
-    while (inow < len) {
+    while (inow < len)
+    {
         char item = infix[inow++];
         precedence token = getToken(item);
 
         if (token == operand)
             postfix[pnow++] = item;
-        else if (token == rparen) {
+        else if (token == rparen)
+        {
             while (stack[top] != lparen)
                 postfix[pnow++] = changeToken(pop());
             pop();
         }
-        else {
+        else
+        {
             while (isp[stack[top]] >= icp[token])
                 postfix[pnow++] = changeToken(pop());
             push(token);
         }
     }
-    
-    while (stack[top] != eos) {
+
+    while (stack[top] != eos)
+    {
         char tmp = changeToken(pop());
         postfix[pnow++] = tmp;
     }
     pop();
 }
 
-
-int eval(char* postfix) {
+int eval(char *postfix)
+{
     char token, op1, op2;
-    for (int i = 0; postfix[i] != 0; i++) {
+    for (int i = 0; postfix[i] != 0; i++)
+    {
         token = postfix[i];
         if (getToken(token) == operand)
             push(token - '0');
-        else {
-            op1 = pop(); op2 = pop();
-            switch (token) {
+        else
+        {
+            op1 = pop();
+            op2 = pop();
+            switch (token)
+            {
             case '*':
                 push(op2 * op1);
                 break;
             case '/':
                 push(op2 / op1);
                 break;
-            case'%':
+            case '%':
                 push(op2 % op1);
                 break;
             case '+':
@@ -127,13 +153,11 @@ int eval(char* postfix) {
     return pop();
 }
 
-
-
-
-int main(void) {
-    FILE* f;
-    char infix[101] = { 0 };
-    char postfix[101] = { 0 };
+int main(void)
+{
+    FILE *f;
+    char infix[101] = {0};
+    char postfix[101] = {0};
 
     f = fopen("input.txt", "r");
     fscanf(f, "%s", infix);
