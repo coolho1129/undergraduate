@@ -1,3 +1,4 @@
+![4 DNS_소켓옵션-01](https://github.com/coolho1129/Network-Programming/assets/105068708/2535eb6b-bcd2-4674-820e-ccf07e65b0e9)
 ![4 DNS_소켓옵션-12](https://github.com/coolho1129/Network-Programming/assets/105068708/792c28fc-c93f-457c-aa20-686df1788c7b)
 ![4 DNS_소켓옵션-13](https://github.com/coolho1129/Network-Programming/assets/105068708/ed0a3927-1ad7-48d6-8267-500f9a4c740c)
 ![4 DNS_소켓옵션-14](https://github.com/coolho1129/Network-Programming/assets/105068708/318ed005-c33d-4032-bb8a-19b8c6949e9d)
