@@ -29,7 +29,7 @@ equation: .space MAXBUFFER
 # s4 save int 2
 # s6 save index
 # s7 save change split char to int 
-# s8 save Eual sign ASCII
+# s8 save Equals sign sign ASCII
 # s10 save operand
 # s11 save result
 
