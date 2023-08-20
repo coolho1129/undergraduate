@@ -88,7 +88,7 @@ LOOP:
 	beq 	t4, s4,CHECK
 
 NEXT:
-	# meet equal operator EXIT
+	# meet EQUAL_OP EXIT
 	beq 	t2, s8,EXIT	
 	
 	# index += 1
