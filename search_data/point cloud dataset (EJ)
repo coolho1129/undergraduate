@@ -1,0 +1,30 @@
+
+*** 아래 데이터들은 추후 검증을 거쳐 수정될 수 있습니다. *** 
+
+### paper with code
+
+L-CAS 3D Point Cloud People Dataset
+https://lcas.lincoln.ac.uk/wp/research/data-sets-software/l-cas-3d-point-cloud-people-dataset/
+
+- 사람 O, 배경 O
+- 배경에 비해 객체가 작음. 전체 사진이 전지적 작가 시점처럼 보임
+
+
+
+### kaggle
+
+
+### 기타
+
+KITTI Vision Benchmark Suite - Object Detectiona Evaluation
+https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d
+
+- 사람 X, 배경 O
+- Lider로 촬영된 데이터로 추측됨 (자동차)
+
+
+### object detection 관련
+Yolo model을 3D 환경에 적용한 모델
+: Complex YOLO라는 것이 존재함. 
+
+https://paperswithcode.com/paper/complex-yolo-real-time-3d-object-detection-on
