@@ -32,8 +32,8 @@
     
 4. relocating
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/86e25377-ae90-4b10-8750-58d03be38016/Untitled.png)
-    
+![segvr1](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/a772442d-026b-4852-9c09-116289d8f6d8)
+
     위 알고리즘에 따라 offset을 결정하였다. 
     
 
@@ -73,8 +73,8 @@
 **우리는 딥러닝을 이용한 instance segmentation & inpainting 방식으로 retargeting을 진행하겠다.** 
 
 ### Proposed Framework
+![segvr2](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/f3fbd208-e50f-49fd-a2c8-51e5989b4b51)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/0c78ff58-58a3-40ef-a84c-be970166cabc/Untitled.png)
 
 ### Segmentation
 
@@ -100,11 +100,10 @@
 - object-removed background image는 16:9로 설정한다.
 - relocating은 offset의 위치를 정해야한다. 아래 알고리즘에 따라 작동한다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/032cae78-ec60-4897-99b4-456fb042ebe9/Untitled.png)
+![segvr3](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/a68cf01d-7179-4a34-b212-15686152f397)
 
 ### Result
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/ece6a7a6-b925-4d10-961d-5c535eafd169/Untitled.png)
+![segvr4](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/20dff6ca-8038-41d2-8f47-78e605316674)
 
 ### Ablation study
 
@@ -113,25 +112,26 @@
     intersection over union으로 객체를 탐지함.
     
     DAVIS dataset 사용하여 성능 평가함. 
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/871be9cf-4101-47ef-b743-6744a527548c/Untitled.png)
-    
+    ![segvr5](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/e6f0146e-54c6-4c64-8db4-49cae4b5c0b9)
+
+  
     더 정확도를 높이기 위해 여백을 두고 segmentation을 진행함. 
     
 2. inpainting method
     - AOT-GAN : 이미지 처리에는 좋았으나 비디오 처리에서는 별로였다.
     - DFCNET : 시공간 자료를 사용하지 않아서 이상해짐.
     - **E^2FGVI** : 가장 자연스러운 결과를 도출함.
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/56db8741-211c-441b-bbab-ac7907480ecb/Untitled.png)
+    ![segvr6](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/5a9cd65a-3c21-4b0a-abc6-c2b72fb27828)
+
+ 
     
 3. Optimal Relocation Method
     - Original Coordinates : 같은 프레임에 붙여넣는것 → 오른쪽 edge가 부자연스러움
     - offset coordinates : 늘어난 width 만큼 더해서 위치하는 것 → 왼쪽 edge 가 부자연스러움
     - **dynamic coordinates** : object 의 위치에 따라 다르게 적용하는 방식 ( 위 알고리즘 참고 ) → 자연스러움
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/65b9d1c4-7eb5-41d6-a562-bdeb74fa30e6/Untitled.png)
-    
+![segvr7](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/060c4a27-5f87-4ba7-bbae-9e880eae2055)
+
 
 ### Discussion & Conclusion
 
