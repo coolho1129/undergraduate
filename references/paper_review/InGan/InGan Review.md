@@ -13,6 +13,9 @@
  이 기술의 필요성
 input image를 가지고 새로운 image를 만들 때, 내부의 주요 요소들이 왜곡되지 않았으면 한다. 사진의 모양이나 크기를 달리 해도 사진의 요소가 자연스럽게 생성/수정/유지 되면 좋겠다.
 
+![image1](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/fda1fdc7-d1db-4c61-aaf1-2c0013bbb344)
+![image2](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/7a1baa5d-517f-42fb-b217-b0ed41b6377c)
+
  위 단락 내용을 가능하게 하는 핵심 기술: Distribution-matching
 Distribution-matching은 same DNA를 가진 새로운 target image를 다른 사이즈/모양으로 생성하게 해준다. 
 
@@ -38,7 +41,7 @@ several contributions
 ## 2.1 Overview
 
 InGAN: image-conditional GAN
-
+![image3](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/f62a5d3c-320c-4c75-84c8-188effab307b)
 generator G 사용 → discriminator D → G 재사용 (for decoding/reconstructing the input given the output)
 
 이 모델로 두 가지 달성할 것이다.
@@ -59,14 +62,17 @@ The discriminator D and *L*GAN encourage matching the patch distribution of y = 
 → G + reuse G : mode collapse 피하고 completeness 유지하기 위해
 
 InGAN의 최종 loss function: 
+![image8](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/84f20273-1a62-4c00-b532-f06f4be80d87)
 
 The architecture is locally connected rather than fully-connected (in particular, it is convolutional).
 
 ## 2.2 Shape-flexible Generator
+![image4](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/3e58b108-a66b-4b88-a192-1d5348d44206)
 
 Making the transformation layer parameter-free allows training G once to transform x to any size, shape or aspect ratio at test time.
 
 ## 2.3 Multi-scale Patch Discriminator
+![image5](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/8297aa8e-22c2-486e-8d66-57e799c28376)
 
 use a fully-convolutional patch discriminator D
 → 따라서 D는 합성된 전체 이미지를 평가하는 대신 패치 분포와 얼마나 잘 일치하는지에 따라 각 패치를 평가한다.
@@ -97,6 +103,7 @@ uses a multi-scale D
 InGAN provides a variety of capabilities and can be applied to multiple tasks.
 
 InGAN applies to a continuum from pure textures to natural images, in a single framework.
+![image6](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/5fdc0c24-b4dd-42b7-a39d-ee6b2454aa34)
 
 InGAN has no semantic information about “objects” or “scenes”, it only models the multiscale patch distribution of the input image.
 
@@ -124,9 +131,10 @@ ablation study to verify the importance of
 
 - “encoder-encoder” 구조
 - multiscale discriminator D
-
 → maintains fine details and coarse structures.
 
 Limitations
 - InGAN은 비지도 학습이다→ 객체나 배경에 대한 의미적인 이해도가 없다.
 - InGAN은 때때로 웃기거나 부자연스러운 결과를 생성한다.
+![image7](https://github.com/coolho1129/Metaverse-Background-Research/assets/75716291/6f286494-8923-41da-8283-61e99156ff11)
+
