@@ -1,7 +1,7 @@
 # Drop the GAN: In Defense of Patches Nearest Neighbors as Single Image Generative Models
 
 ## 논문 원문
-
+[GPNN.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/12799375/GPNN.pdf)
 
 ## Abstract
 
