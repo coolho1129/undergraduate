@@ -3,6 +3,26 @@
 ## 논문 원문
 [GPNN.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/12799375/GPNN.pdf)
 
+## 요약
+
+목적 : PNN 기반 GAN -> GPNN
+새로운 GAN과 유사한 생성 기능 + 가장 가까운 이웃 패치 기반 방법(PNN) ⇒ 두 개의 장점을 모두 얻음.
+GPNN은 단 몇초 안에, 최적화하고 학습할 필요없이 하나의 통합된 framework로 새로운 생성과제를 수행. 
+
+***GAN과 유사한 새로운 생성 기능***
+GPNN은 SinGAN의 multi-scale architecture과 매우 비슷한 architecture를 가짐. 
+각 scale은 source xn과 유사한 patch distribution을 사용하여 다양한 output yn을 생성하는 단일 image generator G(PNN)로 구성됨. 
+
+***PNN consists of 6 main algorithmic steps***
+1. Extract patches
+2. Compute distances
+3. Compute normalized scroes
+4. Find NNs
+5. Replace by NNs
+6. Combine patches
+
+## 상세분석
+
 ## Abstract
 
 기존의 문제점 : input과 생성된 ouput 사이의 패치 유사성이 최대가 되도록하는 최적화 과정을 기반으로 둠. 싱글 이미지 GAN은 오랜 훈련 시간을 요구한다. 그리고 인공적인 느낌이 나고 모드 붕괴등의 최적화 문제가 생긴다. 
@@ -63,8 +83,8 @@ GPNN의 응용
 ## 2. Method
 
 GPNN의 구조가 노이즈를 주입한 input으로 multi-sclae 구조를 사용한다는 점에서 SinGAN과 비슷, 그러나 각 scale마다 non-parametric인 PNN을 사용. 각 scale 마다 source image에서 비슷한 patch 분포로 새로운 이미지를 생성. 
+![Untitled](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/7beb5ab2-4f07-4289-b5ce-471ee020493a)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/b154475f-4be1-4f24-9dca-ce56f42fbdaf/Untitled.png)
 
 ### 2.1 Multi-scale Architecture
 
@@ -84,9 +104,7 @@ PNN은 각 sclae에서 output image와 source image의 내부 확률의 유사�
 
 coarset level에서, 초기 추측은 노이즈를 주입한 source image이다. 
 
-![초기 추측 식](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/bbd00991-5fa4-4799-8569-fa83ca586e1a/Untitled.png)
-
-초기 추측 식
+![초기추측](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/40cc7375-3bfb-45dd-8000-891d10abf8cf)
 
 coarset scale은 이미지에서 객체의 배열을 정의한다.
 
@@ -96,7 +114,8 @@ coarset scale은 이미지에서 객체의 배열을 정의한다.
 
 finer scale에서, 초기 추측은 coarser level의 업스케일된 output이다. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/05660d76-c936-4817-ae21-534081deb82a/Untitled.png)
+![업스케일](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/a10348c3-a2fc-47c3-870a-41856a02673a)
+
 
 각 scale의 output은 더 거친 scale의 output을 개선한 것이다. 따라서 최종 output y=y0는 모든 스케일에서 x의 내부 확률을 공유한다.
 
@@ -147,13 +166,14 @@ PNN consists of 6 main algorithmic steps
 
 ---
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/c8f2a42d-3cff-43ba-8036-0a197c855ce7/Untitled.png)
+![pnn](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/b9e505ea-0e78-415c-8eb1-154f6de86b0f)
+
 
 1. **Extract patches** :
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/5bb5dada-1361-4df7-9269-277b56430ac9/Untitled.png)
-    
+![pnn moudle](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/2b969455-6b9d-419e-b673-2f3248d0d2f2)
 
+    
 PNN은 sharp source image xn과 추기 추측 ~y(n+1)(이전 scale에서 생성된 output의 upscaled version이라서 블러로 됨)을 받음. 
 
 초기 추측으로부터 patch는 query patches로 추출된다. 
@@ -180,7 +200,7 @@ Di;j 컴퓨팅의 병렬 특성을 활용하고 속도를 위해 GPU에서 실�
 
 score는 key 당 factor의 거리를 정규화한다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/92609b01-1d80-4bf7-8623-d9ff660383fc/Untitled.png)
+![정규화식](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/45317563-a77b-41b3-94a3-8cc7db482e5b)
 
 key patch Kj가 query에서 누락되었을 때, normalization term은 커지고 score는 매우 작아진다. 다시 말해, key patch가 query에서 나타났을 때, 정규화 인자는 알파에 가까워진다. 
 
@@ -192,7 +212,7 @@ key patch Kj가 query에서 누락되었을 때, normalization term은 커지고
 
 각 query patch Qi에서 그것과 가장 가까운 key patch의 index를 찾음. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/177a0f04-e9d5-425e-83bc-9e4bdc3096a3/Untitled.png)
+![find_nn](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/1769e669-2dec-4686-a593-992f83ec07f4)
 
 4. **Replace by NNs** : 
 
@@ -224,13 +244,13 @@ realistic structure - 생성된 이미지는 진짜 같아 보이고 구조도 �
 
 diversity - GPNN은 높은 결과의 다양성을 생성한다. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/cb9fe63c-6bb8-4c50-8003-eb5a76cf1d41/Untitled.png)
+![diverse](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/246b0efd-3bb6-4b2f-a008-9db8e2916e7c)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/1c9a9a56-ee81-4b0e-904c-1ba120485c3c/Untitled.png)
+![singan비교](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/a7d8fec7-a296-401f-9ad5-e3ac178e5bef)
 
 GPNN에 의해 성성된 이미지는 매우 현실적으로 보이는 반면, SinGAN은 종종 인공물이 보이고 구조가 의미있어보이지 않는다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/86b8bf7b-52b3-448f-b7ca-50c8a1246a8f/Untitled.png)
+![table](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/83eb8837-bdff-4390-90ce-f9d37727f686)
 
 **Quantitative evaluation** : GPNN과 SinGAN 사이에 양적 비교를 보여준다. 
 
@@ -262,7 +282,7 @@ input image를 target size로 resize 시작하고 r^N만큼 다운스케일하�
 
 피라미드 깊이 N을 패치 크기 p의 x4가 되도록 설정, 하이퍼파라미터 알파는 작은 값으로 세팅하여 완전성을 높임.   
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/2aeb586f-281b-426b-b61f-dd72af336cea/Untitled.png)
+![retargeting](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/240dee15-9979-4cfb-98f8-c627b154fa54)
 
 ### Image-to-image and Structural Analogies
 
@@ -274,7 +294,7 @@ GPNN에서 source image x는 input image A의 패치 분포, 추기 추측 ~y(N+
 
 객체 size에 따라 피라미드 깊이 N이 변화함. 하이퍼 파라미터를 작게 설정. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/098598a6-dc95-4de7-83fa-e322344d3d4f/Untitled.png)
+![structureal](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/cd0e1aae-9647-4a70-b620-1bb01f5a57c3)
 
 ### Conditional Inpainting
 
@@ -282,7 +302,7 @@ GPNN에서 초기 추측 ~y(N+1)은 source image x의 다운스케일한 버전.
 
 ### Image Collage
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/374945cc-2ff3-4ca9-aede-e1d0b18cc5aa/a0a9cedb-242a-4058-bce5-182e7cff4f9b/Untitled.png)
+![collage](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/2bc25fbf-b9b1-4423-9716-ec0424752b35)
 
 ### Image Editing
 
