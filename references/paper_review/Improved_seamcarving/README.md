@@ -65,16 +65,135 @@ V**ideo resizing의 어려움**
 
 Seam : 위에서 아래 방향 또는 좌측에서 우측 방향으로 진행되는 pixel의 monotonic하면서 connected한 path
 
+seam을 삭제하는 경우 : image size가 수평 또는 수직 방향으로 차원이 축소됨.
+
+⇒ 픽셀의 minimum energy path를 잘라낸다.
+
+비디오에서는 각 shot의 입자성 때문에 단순히 seam carving을 적용하는 것은 문제가 생긴다. ( Figure 2 )
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/4ea6ca89-23b1-451f-8338-df05bbe29a77)
+
+그래서 개별적인 frame에 대해서가 아닌 모든 비디오 프레임에 대해 계산해야한다.
+
+- static seam 방식
+    
+    각각의 이미지를 독립적으로 energy function을 적용한 뒤 최대 energy value를 각 픽셀에 취해서 계산한다.
+    
+
+추가적으로, 아래 식을 통해 공간적인 L1 norm을 시공간적인 L1 norm으로 확장할 수 있다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/baad4dc3-ed76-4ac3-ab09-4c0f3c2a8300)
+
+
+
+이 때, α는 [0,1] 구간에 존재하며, 실험적으로 0.3이 좋다는 것을 알아냈다.
+
+Figure 3 을 통해 global energy map과 static seam이 비디오의 삭제 작업에 좋다는 것을 알 수 있다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/e46dee21-4bde-4121-a5a2-9c4e47e44ae6)
+
+
+static method의 장점 : 간단하고 빠르다. 고정된 camera에서 좋은 성능을 가진다.
+
+하지만, 더 복잡한 비디오 장면에서는 적용 X
+
+그래서 video seam을 connected 2D maniford “surface” 로 정의하고 surface의 교차점으로 정의한다. seam은 시간이 지나면서 바뀔 수 있다. (Figure 1)
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/eef0c103-f1a8-49a6-b90b-303bf2bcd865)
+
+
+2D를 처리할 수 있는 방법이 없기 때문에 (DP 포함) graph cut이라는 또 다른 알고리즘을 사용해야한다.
  
 
 
 ## 4. Seam Carving using Graph Cuts
 
+seam carving operator 
+
+→ miminum cost graph cut problem으로 해결한다. 
+
+** graph edges를 arcs로 칭하겠음. ( image의 edge와 용어 혼동을 피하기 위함)
+
+- grid-like graph
+    
+    S : source, T : sink
+    
+    ⇒ 모든 노드는 픽셀을 나타내고 인접한 픽셀끼리 연결되어 있다. 
+    
+    S/T cut (simply a cut ) C : 두 개의 disjoint한 subset S와 T로 그래프의 노드들을 분할하는 것으로 정의한다.
+    
+    C 의 cost : 경계에 있는 arcs (p, q)의 cost의 합 
+    
+    이때, 서로 반대에 있는 arcs는 서로 영향을 미치지 못한다.
+    
+
+⇒ 최적의 seam은 cost가 가장 작게 자른다.
+
+과거 DP → graph cut 과정은 이미 진행되었지만, valid seam을 만들어 내지 못한다. 
+
+- valid seam
+    1. monotonicity : the seam must include one and only one pixel in
+    each row (or column for horizontal seams).
+    2. connectivity : the pixels of the seams must be connected.
+
 ### 4.1 Graph Cuts for Images
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/babcb147-0521-4337-9c33-00001900da72)
+
+
+내부 노드 : 네 개의 이웃을 가짐 ( 위, 아래, 왼쪽, 오른쪽 )
+
+arcs의 weight는 각 상응하는 픽셀의 차이로 정의함.
+
+- horizontal
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/3e1feff4-cdc1-4a92-a6f1-46b4d4d8d4b8)
+
+
+- vertical
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/53c67337-f210-4880-86af-f0a30b07ed05)
+
+
+**⇒ Figure 4-(a)**
+
+valid seam을 위한 monotonicity 추가 
+
+→ 수평적인 node들에 한해 방향이 다르면 다른 weight를 주어야함.
+
+forward arcs (→) : 기존의 식대로 적용
+
+backward arcs (←) : 무한대의 weight 적용
+
+**⇒ Figure 4-(b)**
+
+graph cut과 기본 DP의 가장 큰 차이점은 connected path에 대한 제약 조건이 없다는 것이다. cut은 여러개의 수직 arcs를 통과하게 되면서 부분적으로 연결된 seam을 만들 수 도 있다. → seam의 공간적, 시간적 연속성을 보존해야한다.
+
+vertical arcs와 horizontal arcs의 가중치를 결합하여 우리는 기본 DP 알고리즘을 사용하여 만들 수 있는 graph와 동등한 형태를 만들 수 있다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/106667ac-83ae-425d-a10d-468da2b727cd)
+
+
+**⇒ Figure 4-(c)**
+
+** Figure 4-(d)는 Section 5 에서 소개한 new forward energy 를 사용한 모습이다.
 
 
 ### 4.2 Graph Cuts for Video
 
+source node, sink node를 모두 왼쪽과 오른쪽 columns(vertical이니까)과 연결 할 것이다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/b08b567a-0cda-4d9e-980c-bc2964c523a5)
+
+
+Figure 5 처럼 모든 graph cut을 이용하여 분할하면 3D 영역 안쪽에 maniford가 정의된다. 이 cut은 시간에 대해 monotonic하다. 또한, space와 time에 대해 globally하게 optimal 하다.
+
+graph cut algorithm : 다항시간 소요 (linear running time)
+
+계산 시간은 nodes time의 수에 의존하기 때문에, arcs의 수가 많으면 화소의 수가 2배가 됨 ⇒ 실현 불가능함. (높은 해상도의 이미지 등에서 이미 한계가 발견됨)
+
+> Coarsening (대략적으로 그래프 샘플링하여 간소화)→ Refinement (그래프 정밀 조정) 의 과정으로 graph cut 진행
+>
 
 ## 5. Forward Energy
 
