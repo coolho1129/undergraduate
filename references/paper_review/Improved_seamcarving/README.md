@@ -1,8 +1,5 @@
 # Improved Seam Carving for Video Retargeting
 
-아직 review를 덜마친 상태이며, 추후 review가 완료되면 최종 자료가 업데이트 될 예정임**
-
-## 논문 원문
 
 ## Abstract
 
@@ -58,8 +55,6 @@ V**ideo resizing의 어려움**
       
       비디오는 frame의 시퀀스로 이루어져 있어서 데이터 양이 많다. 
     
-
-## 2. Background
 
 ## 3. Preliminaries
 
@@ -193,16 +188,113 @@ graph cut algorithm : 다항시간 소요 (linear running time)
 계산 시간은 nodes time의 수에 의존하기 때문에, arcs의 수가 많으면 화소의 수가 2배가 됨 ⇒ 실현 불가능함. (높은 해상도의 이미지 등에서 이미 한계가 발견됨)
 
 > Coarsening (대략적으로 그래프 샘플링하여 간소화)→ Refinement (그래프 정밀 조정) 의 과정으로 graph cut 진행
->
+
+
 
 ## 5. Forward Energy
 
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/c5d4eeda-e7d3-47b1-bba1-a18c387df82e)
+
+
+이때까지는 energy의 ‘삭제’ 만 고려하였고 그 결과가 Figure 6 번에 나타나고 있다. seam이 삭제 되면서 에너지는 삭제되는 것 처럼 보이지만, 추가적으로 서로 이웃하지 않은 arcs들이 이웃하게 되면서 에너지가 삽입이 된다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/469d1122-2815-4978-8986-6d1ff2f793d3)
+
+
+위 식을 통해 삽입된 에너지의 양을 알 수 있으며, Figure-6(b)의 그래프에 따르면 Et의 변화량은 실제로 증가하고 있다. 
+
+이 관찰에 따라 우리는 optimal seam을 고르는 새로운 기준을 제안했다.,
+
+새로운 기준은 결과 이미지를  ‘forward’하는 것 처럼 보인다.
+
+**⇒ 우리는 image에 적은 양의 energy를 삽입하는 seam을 찾을 것이다.** 
+
+( 기존에는 energy를 적게 삭제하는 방향 (=backward) 의 seam을 찾았음 )
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/cc290784-f503-45df-b572-c12042e35022)
+
+
+connected seam의 삭제 이후 삭제된 곳을 지역적으로 살펴보면 3가지 상황이 일어날 수 있다. (Figure 7)
+
+pixel-edges : 삭제로 인해 새로 만들어진 edge?
+
 ### 5.1 Forward Energy in Dynamic Programming
+
+가능한 케이스(Figure 7)의 cost를 아래와 같이 정의할 수 있다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/f8b1b444-e670-47eb-8871-1264832f15fc)
+
+
+우리는 위 세 cost를 새로운 DP 계산식을 이용하여 정의하였다. 
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/852c5a53-9f7f-4952-baf8-2e3ea307212f)
+
+
+P(i, j)는 부가적인 픽셀 기반 에너지 측정이다. 
 
 ### 5.2 Forward Energy in Graph Cut
 
+graph cut으로 forward enery를 정의하기 위해서는 세가지 가능한 seam 상황에 대한 cost를 정의한 arc weight로 graph를 만들어야한다.
+
+Figure 4(d) 가 이 연산을 적용하였다. 
+
+ 
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/945e39db-34cc-419e-b58f-9b45809b3839)
+
+
+new horizontal pixel-edge p_i, j-1 p_i, j+1 이 정의되었다. (p_i,j가 삭제되었기 때문) 
+
+추가적으로, Left가 삭제되는지 Right가 삭제되는지의 차이를 
+
+Left and Right neighbors
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/d1074c03-9c88-4b0c-8aac-b27f2084c9d3)
+
+
+로 정의하겠다.
+
+1) monotonicity → p_i, j+1 과 p_i, j 를 infinite weight arc로 연결한다. (backward)
+
+2) connectivity → diagonal backward 추가
+
+3) new vertical pixel-edges에 의해 삽입된 에너지 설명 (Figure 7(b))
+
+- Figure7(b) : no new vertical edges : no energy inserted
+- Figure7(a) : upward vertical arcs
+- Figure7(c) : downward vertical arcs
+
+upward
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/e4b80f54-9afa-4329-9c30-44c40e6bb73d)
+
+
+downward ( -LU 표현 방식을 통해 시작점과 끝점의 반대를 의미함)
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/1da3535d-8fe8-4d6e-a0c9-2d2060955d9a)
+
+
+weight - LU
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/a06b702a-2fec-4d69-8999-ec399f9ada04)
+
+
+
+
+Figure 10, 13 : 향상된 forward energy가 사용된 graph cut 방식을 이용한 결과물
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/cd461a3a-4920-43ae-a481-0ba3089b415c)
+
+
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/9e325c23-eb6a-4414-80d3-183443e832cb)
+
+
+비디오에서는 seam direction에 의존하여 3D video cube를 잘랐다.  X x T를 하는 방식과 동일하게 X x Y 에서 진행하였고, temporal pixel-edges를 만들었다. 
+
+⇒ 잘 작동되었다.
+
 ## 6. Results
 
-## 7. Limitations
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/8d86d821-019a-435a-9f29-d0749fadd3f1)
 
-## 8. Conclusions and Future Work
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/87495422/3270f5ee-62dd-4547-a6e8-ba0f9836420f)
+
