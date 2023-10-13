@@ -1,5 +1,7 @@
 import ffmpeg
 import os
+
+#MIV_mp4 폴더에서 texture 이름 통일시키기
 PATH='C:/Users/USER/Desktop/Metaverse_Retargeting/MIV_mp4'
 os.mkdir('resized_MIV')
 
