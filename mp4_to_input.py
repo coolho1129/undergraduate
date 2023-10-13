@@ -76,7 +76,7 @@ if __name__ == '__main__':
         exit(1)
     
     for f in folder_list:
-        video_list=os.listdir(f)
+        video_list=os.listdir(vidpath+'/'+f)
         for v in video_list:
             dstdir = os.path.join('rawdataset',f, v)
             os.makedirs(dstdir)
