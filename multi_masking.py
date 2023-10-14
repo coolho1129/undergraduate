@@ -12,9 +12,9 @@ import torch
 from mmdetection.mmdet.apis.inference import inference_detector,init_detector
 from util.option_masking import args,compute_intersect_area
 
-target = 0
+target = 0 # set target class 
 #subtarget = [24,26,28,67]
-subtarget = [73]
+subtarget = [73] 
 
 def segmentation(args,model):
     fname = os.path.splitext(os.path.basename(args.imgpath))[0]
@@ -85,37 +85,94 @@ model_m2f = init_detector(args.config, args.checkpoint, device=args.device)
 #datadir = args.didstr
 datadir = args.dstdir
 
+mode=os.path.basename(args.src.split('_')[-1])
+print(mode)
 
-depth_texture=os.listdir(args.src)
-for high in depth_texture:
-    highpath=os.path.join(args.src,high)
-    low_dir=os.listdir(highpath)
+if mode == 'resize' or mode =='downscale':
+    low_dir=os.listdir(args.src)
     for low in low_dir:
-        src=os.path.join(highpath,low)
-    
+        src=os.path.join(args.src,low)
+        
 
         if os.path.isdir(src):
             clip = os.path.basename(args.src)
-            args.imgdir = os.path.join(datadir,clip,high,low,'images')
-            args.maskdir = os.path.join(datadir,clip,high,low,'masks')
-            args.objdir = os.path.join(datadir,clip,high,low,'objects')
+            args.imgdir = os.path.join(datadir,clip,low,'images')
+            args.maskdir = os.path.join(datadir,clip,low,'masks')
+            args.objdir = os.path.join(datadir,clip,low,'objects')
+            
             os.makedirs(args.imgdir,exist_ok=True)
             os.makedirs(args.maskdir,exist_ok=True)
             os.makedirs(args.objdir,exist_ok=True)
-            
+                
             img_list = []
             for ext in ['*.jpg', '*.png']: 
                 img_list.extend(glob(os.path.join(src, ext)))
-            img_list.sort()
-            #print(os.path.basename(img_list[0]))
-            args.ext = os.path.basename(img_list[0]).split('.')[-1]
-            
-            tempimg = cv2.imread(img_list[0])
-            args.h,args.w,_ = tempimg.shape
-            args.size = args.h*args.w
+                img_list.sort()
+                #print(os.path.basename(img_list[0]))
+                args.ext = os.path.basename(img_list[0]).split('.')[-1]
+                
+                tempimg = cv2.imread(img_list[0])
+                args.h,args.w,_ = tempimg.shape
+                args.size = args.h*args.w
 
-            for imgpath in tqdm(img_list):
-                args.imgpath = imgpath
-                segmentation(args, model_m2f)
-        else:
-            print(f"Directory {args.src} not exists.")
+                for imgpath in tqdm(img_list):
+                    args.imgpath = imgpath
+                    segmentation(args, model_m2f)
+
+
+else:
+    depth_texture=os.listdir(args.src)
+    
+    for high in depth_texture:
+        if high=='depths':
+            continue
+        highpath=os.path.join(args.src,high)
+        low_dir=os.listdir(highpath)
+        for low in low_dir:
+            src=os.path.join(highpath,low)
+        
+
+            if os.path.isdir(src):
+                clip = os.path.basename(args.src)
+                args.imgdir = os.path.join(datadir,clip,high,low,'images') 
+                args.maskdir = os.path.join(datadir,clip,high,low,'masks')
+                args.objdir = os.path.join(datadir,clip,high,low,'objects')
+                os.makedirs(args.imgdir,exist_ok=True)
+                os.makedirs(args.maskdir,exist_ok=True)
+                os.makedirs(args.objdir,exist_ok=True)
+                
+                img_list = []
+                for ext in ['*.jpg', '*.png']: 
+                    img_list.extend(glob(os.path.join(src, ext)))
+                img_list.sort()
+                #print(os.path.basename(img_list[0]))
+                args.ext = os.path.basename(img_list[0]).split('.')[-1]
+                
+                tempimg = cv2.imread(img_list[0])
+                args.h,args.w,_ = tempimg.shape
+                args.size = args.h*args.w
+
+                for imgpath in tqdm(img_list):
+                    args.imgpath = imgpath
+                    segmentation(args, model_m2f)
+            else:
+                print(f"Directory {args.src} not exists.")
+            
+    
+    
+    #print(depth_texture)
+
+
+
+
+    
+    
+    # args.img = args.src
+    # args.imgdir = os.path.join(datadir,'single','images')
+    # args.maskdir = os.path.join(datadir,'single','masks')
+    # os.makedirs(args.imgdir,exist_ok=True)
+    # os.makedirs(args.maskdir,exist_ok=True)
+    # args.fname, args.ext = os.path.basename(args.img).split('.')
+    # tempimg = cv2.imread(args.img,cv2.IMREAD_COLOR)
+    # args.h,args.w,_ = tempimg.shape
+    # segmentation(args, model_m2f)
