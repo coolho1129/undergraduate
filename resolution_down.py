@@ -32,8 +32,13 @@ def resize(src,mode):
   
 def main(mivmp4_src):
     mode="FHD"
-    if(len(sys.argv)==3 and sys.argv[2].upper()=='HD'):
+    argc=len(sys.argv)
+    if(argc==3 and sys.argv[2].upper()=='HD'):
         mode='HD'
+    if(argc>3 or argc<2):
+        print("아래와 같은 형태로 인자를 입력해주세요(mode:FHD or HD)")
+        print("python resolution_down.py src mode")
+        exit(-1)
     
     high_dir=os.listdir(mivmp4_src)
     for high in high_dir:
