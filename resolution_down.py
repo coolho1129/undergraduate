@@ -11,10 +11,13 @@ def resize(src,mode):
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 비디오 프레임의 너비
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 비디오 프레임의 높이
     
+    print('현재 해상도: {} x {}'.format(width, height))
     if mode=='FHD':
         resolution='scale=1920:'+str(int((height/width)*1920))
     else:
         resolution='scale=1280:'+str(int((height/width)*1280))
+    print('변경 해상도: {}'.format(resolution))
+    
 
     
     #생성파일 저장 폴더 생성
@@ -38,6 +41,7 @@ def resize(src,mode):
 
     # FFmpeg 명령 실행
     ffmpeg.run(output_stream)
+    print('downscale complete')
     
   
 def main(mivmp4_src):
