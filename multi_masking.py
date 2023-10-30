@@ -85,6 +85,55 @@ model_m2f = init_detector(args.config, args.checkpoint, device=args.device)
 #datadir = args.didstr
 datadir = args.dstdir
 
+<<<<<<< HEAD
+depth_texture=os.listdir(args.src)
+
+for high in depth_texture:
+    if high=='depths':
+        continue
+    highpath=os.path.join(args.src,high)
+    low_dir=os.listdir(highpath)
+    for low in low_dir:
+        src=os.path.join(highpath,low)
+    
+=======
+# mode=os.path.basename(args.src.split('_')[-1])
+# print(mode)
+
+# if mode == 'resize' or mode =='downscale':
+#     low_dir=os.listdir(args.src)
+#     for low in low_dir:
+#         src=os.path.join(args.src,low)
+        
+>>>>>>> 0f0031ba8e69d7c4b51f00f07b9d1a65e9d4fec8
+
+#         if os.path.isdir(src):
+#             clip = os.path.basename(args.src)
+#             args.imgdir = os.path.join(datadir,clip,low,'images')
+#             args.maskdir = os.path.join(datadir,clip,low,'masks')
+#             args.objdir = os.path.join(datadir,clip,low,'objects')
+            
+#             os.makedirs(args.imgdir,exist_ok=True)
+#             os.makedirs(args.maskdir,exist_ok=True)
+#             os.makedirs(args.objdir,exist_ok=True)
+                
+#             img_list = []
+#             for ext in ['*.jpg', '*.png']: 
+#                 img_list.extend(glob(os.path.join(src, ext)))
+#                 img_list.sort()
+#                 #print(os.path.basename(img_list[0]))
+#                 args.ext = os.path.basename(img_list[0]).split('.')[-1]
+                
+#                 tempimg = cv2.imread(img_list[0])
+#                 args.h,args.w,_ = tempimg.shape
+#                 args.size = args.h*args.w
+
+#                 for imgpath in tqdm(img_list):
+#                     args.imgpath = imgpath
+#                     segmentation(args, model_m2f)
+
+
+# else:
 depth_texture=os.listdir(args.src)
 
 for high in depth_texture:
