@@ -6,7 +6,8 @@ import skimage.io
 import torch
 
 def make_output_path(input_path):
-    file_path, file_name = input_path.split('/')[-2], input_path.split('/')[-1]
+    file_path = input_path.split('\\')[-3] + '/' + input_path.split('\\')[-2]
+    file_name = input_path.split('\\')[-1]
     path = f'out/{file_path}/{file_name}'
     return path
 
