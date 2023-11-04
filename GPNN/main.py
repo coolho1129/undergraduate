@@ -3,6 +3,8 @@ from typing import Optional, Tuple
 import fire
 import torch
 
+import os
+
 import applications
 import utils
 
@@ -144,19 +146,41 @@ def conditional_inpainting(masked_image_path: str,
         device: The device to use.
     """
     device = _get_device(device)
-    masked_image = utils.imread(masked_image_path).to(device=device)
-    if mask_path is None:
-        mask_path = utils.find_mask_path(masked_image_path)
-    mask = utils.mask_read(mask_path).to(device=device)
-    output_image = applications.conditional_inpainting(masked_image,
-                                        mask,
-                                        alpha=alpha,
-                                        patch_size=patch_size,
-                                        num_levels=num_levels,
-                                        downscale_ratio=downscale_ratio)
-    if output_path is None:
-        output_path = utils.make_output_path(input_path=masked_image_path)
-    utils.imwrite(output_path, output_image)
+    
+    if os.path.isdir(masked_image_path):
+        image_list = utils.directory_parsing(masked_image_path)
+        for image in image_list:
+            masked_image = utils.imread(image).to(device=device)
+            if mask_path is None:
+                mask_path = utils.find_mask_path(image)
+            mask = utils.mask_read(mask_path).to(device=device)
+            output_image = applications.conditional_inpainting(masked_image,
+                                                mask,
+                                                alpha=alpha,
+                                                patch_size=patch_size,
+                                                num_levels=num_levels,
+                                                downscale_ratio=downscale_ratio)
+            output_path = utils.make_output_path(input_path=image)
+            utils.imwrite(output_path, output_image)
+
+    else:
+        print(f'{masked_image_path} is not a directory, just run single image')
+        masked_image = utils.imread(masked_image_path).to(device=device)
+        if mask_path is None:
+            mask_path = utils.find_mask_path(masked_image_path)
+        mask = utils.mask_read(mask_path).to(device=device)
+        output_image = applications.conditional_inpainting(masked_image,
+                                            mask,
+                                            alpha=alpha,
+                                            patch_size=patch_size,
+                                            num_levels=num_levels,
+                                            downscale_ratio=downscale_ratio)
+        if output_path is None:
+            output_path = utils.make_output_path(input_path=masked_image_path)
+        utils.imwrite(output_path, output_image)
+
+
+    
 
 
 def structural_analogy(source_image_path: str,
