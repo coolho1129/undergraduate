@@ -5,12 +5,21 @@ import skimage.color
 import skimage.io
 import torch
 
+def directory_parsing(dirpath):
+    file_list = []
+
+    for root, dirs, files in os.walk(dirpath):
+        for file in files:
+            file_list.append(os.path.join(root, file))
+    return file_list
+
+
 def make_output_path(input_path):
-    file_path = input_path.split('\\')[-3] + '/' + input_path.split('\\')[-2]
+    file_path = input_path.split('\\')[-3] 
     file_name = input_path.split('\\')[-1]
     path = f'out/{file_path}/{file_name}'
     return path
-    
+
 def find_mask_path(input_path):
     file_path = input_path.split('\\')[-4] + '\\' +input_path.split('\\')[-3]
     file_name = input_path.split('\\')[-1]
