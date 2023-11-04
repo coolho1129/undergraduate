@@ -10,11 +10,12 @@ def make_output_path(input_path):
     file_name = input_path.split('\\')[-1]
     path = f'out/{file_path}/{file_name}'
     return path
-
+    
 def find_mask_path(input_path):
     file_path = input_path.split('\\')[-4] + '\\' +input_path.split('\\')[-3]
     file_name = input_path.split('\\')[-1]
-    path = f'{file_path}/mask/{file_name}'
+    file_name = file_name.split('.')[0] + '.png'
+    path = f'{file_path}/masks/{file_name}'
     return path
 
 
