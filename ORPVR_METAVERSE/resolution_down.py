@@ -33,11 +33,8 @@ def resize(src,mode):
     # 입력 동영상 스트림 생성
     input_stream = ffmpeg.input(input_file)
 
-    # 비디오 스트림을 해상도 변경
-    output_stream = ffmpeg.output(input_stream, output_file, vf=resolution)
-
-    # 오디오 스트림을 복사
-    output_stream = ffmpeg.output(output_stream, vf=resolution, acodec='copy')
+`   # 출력 동영상 스트림 생성
+    output_stream = ffmpeg.output(input_stream, output_file, vf=resolution, vcodec='libx264',acodec='copy')
 
     # FFmpeg 명령 실행
     ffmpeg.run(output_stream)
