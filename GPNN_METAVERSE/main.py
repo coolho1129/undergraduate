@@ -1,22 +1,14 @@
 from typing import Optional, Tuple
-
 import fire
 import torch
-
 import os
-
 import applications
 import utils
-
 _INF = float('inf')
-
-
 def _get_device(requested_device: Optional[str] = None) -> torch.device:
     if requested_device is not None:
         return torch.device(requested_device)
     return torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-
 def generation(input_path: str,
                output_path: str,
                noise_std: float = 0.75,
@@ -26,7 +18,6 @@ def generation(input_path: str,
                num_levels: int = 9,
                device: Optional[str] = None) -> None:
     """Generates diverse images based on a single image.
-    
     Args:
         input_path: Path to the input image.
         output_path: Path to the output image.
@@ -50,15 +41,13 @@ def generation(input_path: str,
                                            num_levels=num_levels,
                                            downscale_ratio=downsacle_ratio)
     utils.imwrite(output_path, output_image)
-
-
 def retargeting(input_path: str,
-                output_path: str,
                 retargeting_ratio: Tuple[float, float],
                 alpha: float = 5e-3,
                 patch_size: int = 7,
                 downsacle_ratio: float = 0.8,
                 num_levels: int = 8,
+                output_path: str = None,
                 device: Optional[str] = None) -> None:
     """Retargt an image to different sizes.
     Args:
@@ -71,22 +60,36 @@ def retargeting(input_path: str,
             Decreasing alpha would encourage completeness.
         patch_size: The size of the patch to use.
         downscale_ratio: Downsampling scale between consecuitive pyramid levels.
-            Should be less than 
+            Should be less than
         num_levels: Number of pyramid levels to use.
         device: The device to use.
     """
-    device = _get_device(device)
-    input_image = utils.imread(input_path).to(device=device)
-    output_image = applications.retargeting(
-        input_image,
-        retargeting_ratio=retargeting_ratio,
-        alpha=alpha,
-        patch_size=patch_size,
-        num_levels=num_levels,
-        downscale_ratio=downsacle_ratio)
-    utils.imwrite(output_path, output_image)
-
-
+    if os.path.isdir(input_path):
+        image_list = utils.directory_parsing(input_path)
+        for image in image_list:
+            input_image = utils.imread(image).to(device=device)
+            output_image = applications.retargeting(
+                input_image,
+                retargeting_ratio=retargeting_ratio,
+                alpha=alpha,
+                patch_size=patch_size,
+                num_levels=num_levels,
+                downscale_ratio=downsacle_ratio)
+            output_path = utils.make_output_path(input_path=image)
+            utils.imwrite(output_path, output_image)
+    else:
+        print(f'{input_path} is not a directory, just run single image')
+        input_image = utils.imread(input_path).to(device=device)
+        output_image = applications.retargeting(
+                input_image,
+                retargeting_ratio=retargeting_ratio,
+                alpha=alpha,
+                patch_size=patch_size,
+                num_levels=num_levels,
+                downscale_ratio=downsacle_ratio)
+        if output_path is None:
+            output_path = utils.make_output_path(input_path=input_path)
+        utils.imwrite(output_path, output_image)
 def editing(source_image_path: str,
             edited_image_path: str,
             output_path: str,
@@ -96,7 +99,6 @@ def editing(source_image_path: str,
             num_levels: int = 5,
             device: Optional[str] = None) -> None:
     """ Edit an image, and semalessly blend the edit.
-
     Args:
         source_image_path: Path to the source input image.
         edited_image_path: Path to the edited input image.
@@ -120,8 +122,6 @@ def editing(source_image_path: str,
                                         num_levels=num_levels,
                                         downscale_ratio=downsacle_ratio)
     utils.imwrite(output_path, output_image)
-
-
 def conditional_inpainting(masked_image_path: str,
                            mask_path: str = None,
                            output_path: str = None,
@@ -130,7 +130,7 @@ def conditional_inpainting(masked_image_path: str,
                            downscale_ratio: float = 0.75,
                            num_levels: int = 5,
                            device: Optional[str] = None) -> None:
-    """ Given an image with an occluded region, 
+    """ Given an image with an occluded region,
         seamlessly fill the region with respect to a chosen color.
     Args:
         masked_image_path: Path to the conditionally masked image. Occluded
@@ -146,7 +146,6 @@ def conditional_inpainting(masked_image_path: str,
         device: The device to use.
     """
     device = _get_device(device)
-    
     if os.path.isdir(masked_image_path):
         image_list = utils.directory_parsing(masked_image_path)
         for image in image_list:
@@ -162,7 +161,6 @@ def conditional_inpainting(masked_image_path: str,
                                                 downscale_ratio=downscale_ratio)
             output_path = utils.make_output_path(input_path=image)
             utils.imwrite(output_path, output_image)
-
     else:
         print(f'{masked_image_path} is not a directory, just run single image')
         masked_image = utils.imread(masked_image_path).to(device=device)
@@ -178,11 +176,6 @@ def conditional_inpainting(masked_image_path: str,
         if output_path is None:
             output_path = utils.make_output_path(input_path=masked_image_path)
         utils.imwrite(output_path, output_image)
-
-
-    
-
-
 def structural_analogy(source_image_path: str,
                        structure_image_path: str,
                        output_path: str,
@@ -191,7 +184,7 @@ def structural_analogy(source_image_path: str,
                        downsacle_ratio: float = 0.75,
                        num_levels: int = 5,
                        device: Optional[str] = None) -> None:
-    """ Create an image that is aligned to the structure, 
+    """ Create an image that is aligned to the structure,
         but shares patch distribution with the source.
     Args:
         source_image_path: Path to the source input image.
@@ -216,7 +209,5 @@ def structural_analogy(source_image_path: str,
         num_levels=num_levels,
         downscale_ratio=downsacle_ratio)
     utils.imwrite(output_path, output_image)
-
-
 if __name__ == '__main__':
     fire.Fire()
