@@ -4,11 +4,11 @@
 
 2023.9.1.~2023.12.31
 
-주제1. SegmentVR 기법을 활용하여 메타버스 데이터를 Retargeting하는 연구 진행
+주제1. SegmentVR 기법을 활용하여 메타버스 비디오를 Retargeting하는 연구 진행
 
 ORPVR_METAVERSE 폴더
 
-주제 2. GPNN 모델을 이용하여 자연 이미지와 메타버스 이미지의 Retargeting 성능 비교
+주제 2. GPNN 모델을 이용하여 메타버스 이미지를 Retargeting하는 연구 진행
 
 GPNN_METAVERSE 폴더
 
