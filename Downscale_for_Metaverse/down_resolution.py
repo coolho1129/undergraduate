@@ -58,7 +58,7 @@ def img_resize(src):
     # 원하는 해상도로 이미지 크기 조정
     new_width = 1280
     new_height = 720
-    resized_image = input_image.resize((new_width, new_height), Image.ANTIALIAS)
+    resized_image = input_image.resize((new_width, new_height), Image.LANCZOS)
 
     # 조정된 이미지 저장
     resized_image.save(output_file)
