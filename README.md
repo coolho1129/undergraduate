@@ -31,7 +31,9 @@ https://drive.google.com/drive/folders/1D570_D3uIRF1B7EIM6_m8eo8aKS8Nfi5?usp=dri
 
 [패치 기반 생성형 모델을 적용한 메타버스 이미지 리타겟팅 연구.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/13466115/default.pdf)
 
-### 논문 포스터
+### UCWIT논문 포스터
+![image](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/99a90acd-7452-4b6b-972e-8dcc9ab4b4ce)
 
-![패치 기반 생성형 모델을 적용한 메타버스 이미지 리타겟팅 연구 포스터](https://github.com/coolho1129/Metaverse-Background-Research/assets/105068708/c0d118c9-854c-4eeb-b192-951c2f367096)
+
+
 
