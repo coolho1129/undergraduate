@@ -29,7 +29,7 @@ https://drive.google.com/drive/folders/1D570_D3uIRF1B7EIM6_m8eo8aKS8Nfi5?usp=dri
 
 ### UCWIT 논문
 
-[최종논문.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/13466115/default.pdf)
+[패치 기반 생성형 모델을 적용한 메타버스 이미지 리타겟팅 연구.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/13466115/default.pdf)
 
 ### 논문 포스터
 
