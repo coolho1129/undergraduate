@@ -54,4 +54,4 @@ python3 program.py [mode] [input_media]
 
 ### Usecase
 
-![downscale](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/32ffe568-e8a1-435b-b84e-3a19f1128e83)
+![downscale_usecase](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/aeab0615-7251-44e3-95ba-25d62230945f)
