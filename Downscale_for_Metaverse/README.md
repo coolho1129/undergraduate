@@ -48,6 +48,10 @@ python3 program.py [mode] [input_media]
        <img src="https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/1eae0fec-19f2-434f-8fe9-aeab8f8226ee" width="450" height="200">
 
 
-1. output
+3. output
 
-programname / [input_media_name_output.~~]
+    programname / [input_media_name_output.~~]
+
+### Usecase
+
+![downscale](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/32ffe568-e8a1-435b-b84e-3a19f1128e83)
