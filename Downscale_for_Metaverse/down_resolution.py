@@ -2,93 +2,142 @@ import ffmpeg
 import os
 import sys
 import cv2
-from PIL import Image
+import argparse
 
-def video_resize(src,mode):
-    # 비디오 파일 열기
-    cap = cv2.VideoCapture(src)
+def resize(input,output,mode,ratio):
+    video_extension=('.mp4','.avi')
+    image_extension=('.jpg','.png','.jpeg')
+    _,file_extension= os.path.splitext(input)
+    
+    if file_extension in image_extension:
+        print('확장자: '+file_extension)
+        print('이미지 파일입니다.')
+        img_resize(input,output,mode,ratio)
 
-    # 비디오 파일 정보 얻기
-    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 비디오 프레임의 너비
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 비디오 프레임의 높이
-    print('현재 해상도: {} x {}'.format(width, height))
-    resolution=""
-    if mode=='FHD':
-        resolution='scale=1920:'+str(int((height/width)*1920))
+    elif file_extension in video_extension:
+        print('확장자: '+file_extension)
+        print('비디오 파일입니다.')
+        video_resize(input,output,mode,ratio)
+    
     else:
-        resolution='scale=1280:'+str(int((height/width)*1280))
-    print('변경 해상도: {}'.format(resolution))
+        print(file_extension+'은(는) 지원하지 않는 파일 형식입니다. 이미지 또는 비디오 파일을 입력해주세요.')
+        sys.exit()  
+        
+def set_output(input,output):
+    file_path = os.path.basename(input)
+    file_name, file_extension = os.path.splitext(file_path)
+    file_name = file_name + '_resized' + file_extension
+    output_file = os.path.join(output, file_name)
+    return output_file
+
+def set_height(mode):
+    modes={'FHD':1080,'HD':720,'SD':480}
+    if mode not in modes:
+        print('지원하지 않는 해상도 모드입니다. FHD, HD, SD 중 하나를 입력해주세요.')
+        sys.exit()
+    return modes[mode]
     
+def set_ratio(ratio,width,height,mode):
+    if not ratio:
+        ratio=str(width)+':'+str(height)
     
-    #생성파일 저장 폴더 생성
-    folder=src.split("\\")[0]
-    dstfolder=folder+'_resize'
-    dstsrc=src.replace(folder, dstfolder)
-    dstsrc=src.replace(dstsrc.split("\\")[1],dstsrc.split("\\")[1]+"_resize")
-    dstdir=dstsrc.replace(dstsrc.split("\\")[-1],"")
-    os.makedirs(dstdir,exist_ok=True)
+    rationum=ratio.split(":")
+    width_r= int(rationum[0])
+    height_r= int(rationum[1])
+    new_height=set_height(mode)
+    new_width = int(new_height*width_r/height_r)
+    if width<new_width:
+        print('너비가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_width))
+        sys.exit()
+    elif height<new_height:
+        print('높이가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_height))
+        sys.exit()
+    print('변경 해상도: {} x {}'.format(new_width, new_height))
+    
+    return new_width, new_height
+
+def video_resize(input,output,mode='FHD',ratio=None):
     
     # 입력 및 출력 파일 경로 설정
-    input_file = src
-    output_file = os.path.join(dstsrc)
+    input_file = input
+    output_file = set_output(input,output)
+ 
+    # 비디오 파일 열기
+    cap = cv2.VideoCapture(input)
+
+    # 비디오 파일 정보 얻기
+    if cap.isOpened():
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 비디오 프레임의 너비
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 비디오 프레임의 높이
+        print('현재 해상도: {} x {}'.format(width, height))
+    else:
+        print("비디오를 열 수 없습니다. 파일 경로 또는 코덱을 확인하세요.")
+        sys.exit()
         
+    if(width<600 or height<1080):
+        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080 이상의 해상도를 가진 파일을 입력해주세요.')
+        sys.exit()
+
+    # 해상도 변경
+    new_width,new_height=set_ratio(ratio,width,height,mode)
+    resolution='scale='+str(new_width)+':'+str(new_height)
+    
     # 입력 동영상 스트림 생성
     input_stream = ffmpeg.input(input_file)
     output_stream = ffmpeg.output(input_stream, output_file, vf=resolution, vcodec='libx264',acodec='copy')
 
     # FFmpeg 명령 실행
     ffmpeg.run(output_stream)
-    print('video downscale complete')
-
-def img_resize(src):
-    #생성파일 저장 폴더 생성
-    folder=src.split("\\")[0]
-    dstfolder=folder+'_resize'
-    dstsrc=src.replace(folder, dstfolder)
-    dstsrc=src.replace(dstsrc.split("\\")[1],dstsrc.split("\\")[1]+"_resize")
-    dstdir=dstsrc.replace(dstsrc.split("\\")[-1],"")
-    os.makedirs(dstdir,exist_ok=True)
+    print('비디오 리사이징 완료')
     
-    # 입력 및 출력 파일 경로 설정
-    input_file = src
-    output_file = os.path.join(dstsrc)
+
+def img_resize(input,output,mode,ratio):
+    #저장 경로 설정
+    output_file = set_output(input,output)
+       
     # 이미지 불러오기
-    input_image = Image.open(input_file)
-
+    input_image = cv2.imread(input)
+    
+    # 이미지 크기 구하기
+    height, width, _ = input_image.shape
+    
+    print('현재 해상도: {} x {}'.format(width, height))
+    
+    if(width<600 or height<450):
+        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080이상의 해상도를 가진 파일을 입력해주세요.')
+        sys.exit()
+    
     # 원하는 해상도로 이미지 크기 조정
-    new_width = 1280
-    new_height = 720
-    resized_image = input_image.resize((new_width, new_height), Image.LANCZOS)
+    new_width,new_height=set_ratio(ratio,width,height,mode)
+    resized_image = cv2.resize(input_image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
 
-    # 조정된 이미지 저장
-    resized_image.save(output_file)
-    print('image resizing complete')
+    # 이미지 저장
+    cv2.imwrite(output_file, resized_image)
+    print('이미지 리사이징 완료')
     
-  
-def main(src):
-    mode="FHD"
-    argc=len(sys.argv)
-    if(argc==3 and sys.argv[2].upper()=='HD'):
-        mode='HD'
-    if(argc>3 or argc<2):
-        print("아래와 같은 형태로 인자를 입력해주세요(mode:FHD or HD)")
-        print("python resolution_down.py src mode")
-        exit(-1)
+def main():
+    parser = argparse.ArgumentParser(description='명령줄에서 해상도 설정을 변경하는 스크립트')
+    parser.add_argument('-input','-i', type=str, help='이미지 또는 비디오 파일 경로를 입력해주세요.')
+    parser.add_argument('-output','-o', type=str, default='.', help='출력 파일 경로를 입력해주세요.')
+    parser.add_argument('-mode','-m', choices=['FHD', 'HD', 'SD'], default='FHD', help='해상도 모드 설정 (기본값: FHD)')
+    parser.add_argument('-ratio','-r', type=str, help='다운 스케일 비율 설정, N:M 형식으로 입력해주세요. (기본값: 원본 비율)')
     
-    high_dir=os.listdir(src)
-    for high in high_dir:
-        high_path=os.path.join(src,high)
-        low_dir=os.listdir(high_path)
-        for low in low_dir:
-            low_path=os.path.join(high_path,low)
-            files=os.listdir(low_path)
-            for file in files:
-                file_path=os.path.join(low_path,file)
-                if file.lower().endswith('.jpg') or file.lower().endswith('.png'):
-                    img_resize(file_path)
-                elif file.lower().endswith('.mp4'):
-                    video_resize(file_path,mode)
+    args = parser.parse_args()
+    if not args.input:
+        print('usage: down_resolutionV3.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
+        print("-h 옵션을 사용하여 자세한 도움말을 확인하세요.")
+        sys.exit()
+    
+    input = args.input
+    output = args.output
+    mode = args.mode
+    ratio = args.ratio
+
+    print(f'입력 파일 경로: {input}')
+    print(f'출력 파일 저장 경로 :{output}')
+    print(f'해상도 모드: {mode}')
+    print(f'다운 스케일 비율: {ratio if ratio else "원본 비율을 유지합니다."}')    
+    resize(input,output,mode,ratio)
 
 if __name__ == '__main__':
-    #print(sys.argv)
-    main(sys.argv[1])
+    main()
