@@ -45,7 +45,7 @@ python3 program.py [mode] [input_media]
         - HD : N x 720 ( HD )
         - SD : N x 480 ( SD )
 
-       <img src="https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/1eae0fec-19f2-434f-8fe9-aeab8f8226ee" width="300" height="150">
+       <img src="https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/1eae0fec-19f2-434f-8fe9-aeab8f8226ee" width="300" height="200">
 
 
 1. output
