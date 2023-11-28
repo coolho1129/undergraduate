@@ -20,7 +20,10 @@ def resize(input,output,mode,ratio):
         video_resize(input,output,mode,ratio)
     
     else:
-        print(file_extension+'은(는) 지원하지 않는 파일 형식입니다. 이미지 또는 비디오 파일을 입력해주세요.')
+        print(file_extension+'은(는) 지원하지 않는 파일 형식입니다.')
+        print('아래의 확장자를 따르는 이미지 또는 비디오 파일을 입력해주세요.')
+        print('이미지 확장자: .png, .jpg, .jpeg')
+        print('비디어 확장자: .mp4','.avi')
         sys.exit()  
         
 def set_output(input,output):
