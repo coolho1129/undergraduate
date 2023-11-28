@@ -107,7 +107,7 @@ def img_downscale(input,output,mode,ratio):
     print('현재 해상도: {} x {}'.format(width, height))
     
     if(width<600 or height<450):
-        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080이상의 해상도를 가진 파일을 입력해주세요.')
+        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 450이상의 해상도를 가진 파일을 입력해주세요.')
         sys.exit()
     
     # 원하는 해상도로 이미지 크기 조정
