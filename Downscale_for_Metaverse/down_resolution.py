@@ -4,7 +4,7 @@ import sys
 import cv2
 import argparse
 
-def resize(input,output,mode,ratio):
+def downscale(input,output,mode,ratio):
     video_extension=('.mp4','.avi')
     image_extension=('.jpg','.png','.jpeg')
     _,file_extension= os.path.splitext(input)
@@ -12,12 +12,12 @@ def resize(input,output,mode,ratio):
     if file_extension in image_extension:
         print('확장자: '+file_extension)
         print('이미지 파일입니다.')
-        img_resize(input,output,mode,ratio)
+        img_downscale(input,output,mode,ratio)
 
     elif file_extension in video_extension:
         print('확장자: '+file_extension)
         print('비디오 파일입니다.')
-        video_resize(input,output,mode,ratio)
+        video_downscale(input,output,mode,ratio)
     
     else:
         print(file_extension+'은(는) 지원하지 않는 파일 형식입니다.')
@@ -59,7 +59,7 @@ def set_ratio(ratio,width,height,mode):
     
     return new_width, new_height
 
-def video_resize(input,output,mode='FHD',ratio=None):
+def video_downscale(input,output,mode='FHD',ratio=None):
     
     # 입력 및 출력 파일 경로 설정
     input_file = input
@@ -91,10 +91,10 @@ def video_resize(input,output,mode='FHD',ratio=None):
 
     # FFmpeg 명령 실행
     ffmpeg.run(output_stream)
-    print('비디오 리사이징 완료')
+    print('비디오 다운스케일 완료')
     
 
-def img_resize(input,output,mode,ratio):
+def img_downscale(input,output,mode,ratio):
     #저장 경로 설정
     output_file = set_output(input,output)
        
@@ -116,7 +116,7 @@ def img_resize(input,output,mode,ratio):
 
     # 이미지 저장
     cv2.imwrite(output_file, resized_image)
-    print('이미지 리사이징 완료')
+    print('이미지 다운스케일 완료')
     
 def main():
     parser = argparse.ArgumentParser(description='명령줄에서 해상도 설정을 변경하는 스크립트')
@@ -140,7 +140,7 @@ def main():
     print(f'출력 파일 저장 경로 :{output}')
     print(f'해상도 모드: {mode}')
     print(f'다운 스케일 비율: {ratio if ratio else "원본 비율을 유지합니다."}')    
-    resize(input,output,mode,ratio)
+    downscale(input,output,mode,ratio)
 
 if __name__ == '__main__':
     main()
