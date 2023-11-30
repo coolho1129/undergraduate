@@ -24,7 +24,7 @@ def downscale(input,output,mode,ratio):
         print('아래의 확장자를 따르는 이미지 또는 비디오 파일을 입력해주세요.')
         print('이미지 확장자: .png, .jpg, .jpeg')
         print('비디어 확장자: .mp4','.avi')
-        sys.exit()  
+        sys.exit(1)  
         
 def set_output(input,output):
     file_path = os.path.basename(input)
@@ -45,10 +45,10 @@ def set_ratio(ratio,width,height,mode):
     new_width = int(new_height*width_r/height_r)
     if width<new_width:
         print('너비가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_width))
-        sys.exit()
+        sys.exit(1)
     elif height<new_height:
         print('높이가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_height))
-        sys.exit()
+        sys.exit(1)
     print('변경 해상도: {} x {}'.format(new_width, new_height))
     
     return new_width, new_height
@@ -69,11 +69,11 @@ def video_downscale(input,output,mode='FHD',ratio=None):
         print('현재 해상도: {} x {}'.format(width, height))
     else:
         print("비디오를 열 수 없습니다. 파일 경로 또는 코덱을 확인하세요.")
-        sys.exit()
+        sys.exit(1)
         
     if(width<600 or height<1080):
         print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080 이상의 해상도를 가진 파일을 입력해주세요.')
-        sys.exit()
+        sys.exit(1)
 
     # 해상도 변경
     new_width,new_height=set_ratio(ratio,width,height,mode)
@@ -102,7 +102,7 @@ def img_downscale(input,output,mode,ratio):
     
     if(width<600 or height<450):
         print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 450이상의 해상도를 가진 파일을 입력해주세요.')
-        sys.exit()
+        sys.exit(1)
     
     # 원하는 해상도로 이미지 크기 조정
     new_width,new_height=set_ratio(ratio,width,height,mode)
@@ -123,7 +123,7 @@ def main():
     if not args.input:
         print('usage: python down_resolutionV3.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
         print("-h 옵션을 사용하여 자세한 도움말을 확인하세요.")
-        sys.exit()
+        sys.exit(1)
     
     input = args.input
     output = args.output
