@@ -100,7 +100,7 @@ def img_downscale(input,output,mode,ratio):
         input_image = cv2.imread(input)
         
         # 이미지가 성공적으로 불러와졌는지 확인
-        if not input_image:
+        if input_image is None:
             raise FileNotFoundError("이미지를 불러올 수 없습니다.")
         
         # 이미지 크기 구하기
