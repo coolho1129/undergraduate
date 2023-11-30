@@ -24,10 +24,10 @@ def downscale(input,output,mode,ratio):
         print('비디어 확장자: .mp4','.avi')
         sys.exit(1)  
         
-def set_output(input,output):
+def set_output(input,output,mode):
     file_path = os.path.basename(input)
     file_name, file_extension = os.path.splitext(file_path)
-    file_name = f'{file_name}_resized{file_extension}'
+    file_name = f'{file_name}_resized_{mode}{file_extension}'
     output_file = os.path.join(output, file_name)
     
     return output_file
@@ -58,7 +58,7 @@ def video_downscale(input,output,mode='FHD',ratio=None):
     try:
         # 입력 및 출력 파일 경로 설정
         input_file = input
-        output_file = set_output(input,output)
+        output_file = set_output(input,output,mode)
     
         # 비디오 파일 열기
         cap = cv2.VideoCapture(input)
@@ -94,7 +94,7 @@ def video_downscale(input,output,mode='FHD',ratio=None):
 def img_downscale(input,output,mode,ratio):
     try:
          #저장 경로 설정
-        output_file = set_output(input,output)   
+        output_file = set_output(input,output,mode)   
         
         # 이미지 불러오기
         input_image = cv2.imread(input)
