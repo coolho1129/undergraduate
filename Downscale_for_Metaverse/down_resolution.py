@@ -123,7 +123,7 @@ def main():
     parser.add_argument('-input','-i', type=str, help='이미지 또는 비디오 파일 경로를 입력해주세요.')
     parser.add_argument('-output','-o', type=str, default='.', help='출력 파일 경로를 입력해주세요. (기본 값: 현재 폴더)')
     parser.add_argument('-mode','-m', choices=['FHD', 'HD', 'SD'], default='FHD', help='해상도 모드(FHD,HD,SD)를 대문자로 입력해주세요. (기본값: FHD)')
-    parser.add_argument('-ratio','-r', type=str, help='다운 스케일 비율 설정, N:M 형식으로 입력해주세요. (기본값: 원본 비율 유지)')
+    parser.add_argument('-ratio','-r', type=str, help='다운 스케일 비율 설정, 너비:높이(ex 21:9) 형식으로 입력해주세요. (기본값: 원본 비율 유지)')
     
     args = parser.parse_args()
     if not args.input:
