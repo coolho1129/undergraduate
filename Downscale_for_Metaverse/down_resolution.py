@@ -78,7 +78,7 @@ def video_downscale(input,output,mode='FHD',ratio=None):
 
         # 해상도 변경
         new_width,new_height=set_ratio(ratio,width,height,mode)
-        resolution='scale='+str(new_width)+':'+str(new_height)
+        resolution=f'scale={new_width}:{new_height}'
         
         # 입력 동영상 스트림 생성
         input_stream = ffmpeg.input(input_file)
