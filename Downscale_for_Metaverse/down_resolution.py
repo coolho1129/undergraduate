@@ -13,12 +13,10 @@ def downscale(input,output,mode,ratio):
         print('확장자: '+file_extension)
         print('이미지 파일입니다.')
         img_downscale(input,output,mode,ratio)
-
     elif file_extension in video_extension:
         print('확장자: '+file_extension)
         print('비디오 파일입니다.')
         video_downscale(input,output,mode,ratio)
-    
     else:
         print(file_extension+'은(는) 지원하지 않는 파일 형식입니다.')
         print('아래의 확장자를 따르는 이미지 또는 비디오 파일을 입력해주세요.')
@@ -51,6 +49,7 @@ def set_ratio(ratio,width,height,mode):
     elif height<new_height:
         print('높이가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_height))
         sys.exit(1)
+    
     print('변경 해상도: {} x {}'.format(new_width, new_height))
     
     return new_width, new_height
@@ -92,7 +91,6 @@ def video_downscale(input,output,mode='FHD',ratio=None):
     except Exception as e:
         print(f"예외 발생: {e}")
     
-
 def img_downscale(input,output,mode,ratio):
     try:
          #저장 경로 설정
