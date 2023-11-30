@@ -55,66 +55,74 @@ def set_ratio(ratio,width,height,mode):
 
 def video_downscale(input,output,mode='FHD',ratio=None):
     
-    # 입력 및 출력 파일 경로 설정
-    input_file = input
-    output_file = set_output(input,output)
- 
-    # 비디오 파일 열기
-    cap = cv2.VideoCapture(input)
-
-    # 비디오 파일 정보 얻기
-    if cap.isOpened():
-        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 비디오 프레임의 너비
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 비디오 프레임의 높이
-        print('현재 해상도: {} x {}'.format(width, height))
-    else:
-        print("비디오를 열 수 없습니다. 파일 경로 또는 코덱을 확인하세요.")
-        sys.exit(1)
-        
-    if(width<600 or height<1080):
-        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080 이상의 해상도를 가진 파일을 입력해주세요.')
-        sys.exit(1)
-
-    # 해상도 변경
-    new_width,new_height=set_ratio(ratio,width,height,mode)
-    resolution='scale='+str(new_width)+':'+str(new_height)
+    try:
+        # 입력 및 출력 파일 경로 설정
+        input_file = input
+        output_file = set_output(input,output)
     
-    # 입력 동영상 스트림 생성
-    input_stream = ffmpeg.input(input_file)
-    output_stream = ffmpeg.output(input_stream, output_file, vf=resolution, vcodec='libx264',acodec='copy')
+        # 비디오 파일 열기
+        cap = cv2.VideoCapture(input)
 
-    # FFmpeg 명령 실행
-    ffmpeg.run(output_stream)
-    print('비디오 다운스케일 완료')
+        # 비디오 파일 정보 얻기
+        if cap.isOpened():
+            width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 비디오 프레임의 너비
+            height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 비디오 프레임의 높이
+            print('현재 해상도: {} x {}'.format(width, height))
+        else:
+            print("비디오를 열 수 없습니다. 파일 경로 또는 코덱을 확인하세요.")
+            sys.exit(1)
+            
+        if(width<600 or height<1080):
+            print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 1080 이상의 해상도를 가진 파일을 입력해주세요.')
+            sys.exit(1)
+
+        # 해상도 변경
+        new_width,new_height=set_ratio(ratio,width,height,mode)
+        resolution='scale='+str(new_width)+':'+str(new_height)
+        
+        # 입력 동영상 스트림 생성
+        input_stream = ffmpeg.input(input_file)
+        output_stream = ffmpeg.output(input_stream, output_file, vf=resolution, vcodec='libx264',acodec='copy')
+
+        # FFmpeg 명령 실행
+        ffmpeg.run(output_stream)
+        print('비디오 다운스케일 완료')
+    
+    except Exception as e:
+        print(f"예외 발생: {e}")
     
 
 def img_downscale(input,output,mode,ratio):
-    #저장 경로 설정
-    output_file = set_output(input,output)
-       
-    # 이미지 불러오기
-    input_image = cv2.imread(input)
-    
-    # 이미지가 성공적으로 불러와졌는지 확인
-    if input_image is None:
-        raise FileNotFoundError("이미지를 불러올 수 없습니다. 파일 경로 또는 파일명을 확인해주세요")
-    
-    # 이미지 크기 구하기
-    height, width, _ = input_image.shape
-    
-    print('현재 해상도: {} x {}'.format(width, height))
-    
-    if(width<600 or height<450):
-        print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 450이상의 해상도를 가진 파일을 입력해주세요.')
-        sys.exit(1)
-    
-    # 원하는 해상도로 이미지 크기 조정
-    new_width,new_height=set_ratio(ratio,width,height,mode)
-    resized_image = cv2.resize(input_image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
+    try:
+         #저장 경로 설정
+        output_file = set_output(input,output)   
+        
+        # 이미지 불러오기
+        input_image = cv2.imread(input)
+        
+        # 이미지가 성공적으로 불러와졌는지 확인
+        if input_image == None:
+            raise FileNotFoundError("이미지를 불러올 수 없습니다.")
+        
+        # 이미지 크기 구하기
+        height, width, _ = input_image.shape
+        
+        print('현재 해상도: {} x {}'.format(width, height))
+        
+        if(width<600 or height<450):
+            print('해상도가 너무 작습니다. 너비가 600 이상이고 높이가 450이상의 해상도를 가진 파일을 입력해주세요.')
+            sys.exit(1)
+        
+        # 원하는 해상도로 이미지 크기 조정
+        new_width,new_height=set_ratio(ratio,width,height,mode)
+        resized_image = cv2.resize(input_image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
 
-    # 이미지 저장
-    cv2.imwrite(output_file, resized_image)
-    print('이미지 다운스케일 완료')
+        # 이미지 저장
+        cv2.imwrite(output_file, resized_image)
+        print('이미지 다운스케일 완료')
+    
+    except Exception as e:
+        print(f"예외 발생: {e}")
     
 def main():
     parser = argparse.ArgumentParser(description='명령줄에서 해상도 설정을 변경하는 스크립트\n')
