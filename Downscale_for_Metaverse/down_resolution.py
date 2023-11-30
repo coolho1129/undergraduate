@@ -27,7 +27,7 @@ def downscale(input,output,mode,ratio):
 def set_output(input,output):
     file_path = os.path.basename(input)
     file_name, file_extension = os.path.splitext(file_path)
-    file_name = file_name + '_resized' + file_extension
+    file_name = f'{file_name}_resized{file_extension}'
     output_file = os.path.join(output, file_name)
     
     return output_file
