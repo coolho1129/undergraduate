@@ -31,6 +31,7 @@ def set_output(input,output):
     file_name, file_extension = os.path.splitext(file_path)
     file_name = file_name + '_resized' + file_extension
     output_file = os.path.join(output, file_name)
+    
     return output_file
 
 def set_ratio(ratio,width,height,mode):
@@ -43,6 +44,7 @@ def set_ratio(ratio,width,height,mode):
     height_r = int(rationum[1])
     new_height = modes[mode]
     new_width = int(new_height*width_r/height_r)
+    
     if width<new_width:
         print('너비가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_width))
         sys.exit(1)
@@ -54,7 +56,6 @@ def set_ratio(ratio,width,height,mode):
     return new_width, new_height
 
 def video_downscale(input,output,mode='FHD',ratio=None):
-    
     try:
         # 입력 및 출력 파일 경로 설정
         input_file = input
@@ -146,6 +147,7 @@ def main():
     print(f'출력 파일 저장 경로 :{output}')
     print(f'해상도 모드: {mode}')
     print(f'다운 스케일 비율: {ratio if ratio else "원본 비율을 유지합니다."}')    
+    
     downscale(input,output,mode,ratio)
 
 if __name__ == '__main__':
