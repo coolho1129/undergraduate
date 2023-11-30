@@ -33,21 +33,15 @@ def set_output(input,output):
     output_file = os.path.join(output, file_name)
     return output_file
 
-def set_height(mode):
-    modes={'FHD':1080,'HD':720,'SD':480}
-    if mode not in modes:
-        print('지원하지 않는 해상도 모드입니다. FHD, HD, SD 중 하나를 입력해주세요.')
-        sys.exit()
-    return modes[mode]
-    
 def set_ratio(ratio,width,height,mode):
     if not ratio:
         ratio=str(width)+':'+str(height)
     
-    rationum=ratio.split(":")
-    width_r= int(rationum[0])
-    height_r= int(rationum[1])
-    new_height=set_height(mode)
+    modes={'FHD':1080,'HD':720,'SD':480}
+    rationum = ratio.split(":")
+    width_r = int(rationum[0])
+    height_r = int(rationum[1])
+    new_height = modes[mode]
     new_width = int(new_height*width_r/height_r)
     if width<new_width:
         print('너비가 {}보다 작습니다. 다른 비율을 입력해주세요.'.format(new_width))
@@ -119,15 +113,15 @@ def img_downscale(input,output,mode,ratio):
     print('이미지 다운스케일 완료')
     
 def main():
-    parser = argparse.ArgumentParser(description='명령줄에서 해상도 설정을 변경하는 스크립트')
-    parser.add_argument('-input','-i', type=str, help='이미지 또는 비디오 파일 경로를 입력해주세요.')
-    parser.add_argument('-output','-o', type=str, default='.', help='출력 파일 경로를 입력해주세요. (기본 값: 현재 폴더)')
-    parser.add_argument('-mode','-m', choices=['FHD', 'HD', 'SD'], default='FHD', help='해상도 모드(FHD,HD,SD)를 대문자로 입력해주세요. (기본값: FHD)')
-    parser.add_argument('-ratio','-r', type=str, help='다운 스케일 비율 설정, 너비:높이(ex 21:9) 형식으로 입력해주세요. (기본값: 원본 비율 유지)')
+    parser = argparse.ArgumentParser(description='명령줄에서 해상도 설정을 변경하는 스크립트\n')
+    parser.add_argument('-input','-i', type=str, help='이미지 또는 비디오 파일 경로를 입력해주세요.\n')
+    parser.add_argument('-output','-o', type=str, default='.', help='출력 파일 경로를 입력해주세요. (기본 값: 현재 폴더)\n')
+    parser.add_argument('-mode','-m', choices=['FHD', 'HD', 'SD'], default='FHD', help='해상도 모드(FHD,HD,SD)를 대문자로 입력해주세요. (기본값: FHD)\n')
+    parser.add_argument('-ratio','-r', type=str, help='다운 스케일 비율 설정, 너비:높이(ex 21:9) 형식으로 입력해주세요. (기본값: 원본 비율 유지)\n')
     
     args = parser.parse_args()
     if not args.input:
-        print('usage: down_resolutionV3.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
+        print('usage: python down_resolutionV3.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
         print("-h 옵션을 사용하여 자세한 도움말을 확인하세요.")
         sys.exit()
     
