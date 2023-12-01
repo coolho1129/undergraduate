@@ -34,7 +34,7 @@ def set_ratio(ratio, width, height, mode):
     if not ratio:
         ratio = f'{width}:{height}'
     
-    modes = {'FHD':1080,'HD':720,'SD':480}
+    modes = {'FHD' : 1080,'HD' : 720,'SD' : 480}
     rationum = ratio.split(":")
     width_r = int(rationum[0])
     height_r = int(rationum[1])
