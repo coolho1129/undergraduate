@@ -132,7 +132,7 @@ def main():
     
     args = parser.parse_args()
     if not args.input:
-        print('usage: python down_resolutionV3.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
+        print('usage: python down_resolution.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]')
         print("-h 옵션을 사용하여 자세한 도움말을 확인하세요.")
         sys.exit(1)
     
