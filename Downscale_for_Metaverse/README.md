@@ -37,14 +37,16 @@ python3 program.py [mode] [input_media]
 2. option
     1. 비율
         - 비율 그대로 조정 (default)
-        - 사용자가 원하는 비율로 조정 --ratio ( -- r) [height, width]
-    2. 도움말 ( -- help / -- h )
+        - 사용자가 원하는 비율로 조정 -ratio ( -r) height : width
+    2. 도움말 ( -help / -h )
         - 도움말 확인
-    3. 해상도 선택 ( -- mode= / -- m= )
-        - Full-HD : N x 1080 ( --mode=FHD )
+    3. 해상도 선택 ( -mode / -m )
+        - Full-HD : N x 1080 ( -mode FHD )
         - HD : N x 720 ( HD )
         - SD : N x 480 ( SD )
-
+    4. output 경로 지정 (-output / -o)
+        - defalut 현재 파일을 실행중인 디렉토리
+        - 사용자가 원하는 위치 지정 -output (-o) 경로
        <img src="https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/1eae0fec-19f2-434f-8fe9-aeab8f8226ee" width="450" height="200">
 
 
