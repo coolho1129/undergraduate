@@ -23,8 +23,8 @@ ex) source image 너무 작으면 error 발생시키기
 ## Down_resolution
 
 program.py 라고 가정함
-
-python3 program.py [mode] [input_media]
+사용방법: python down_resolution.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]
+python program.py [input_media]
 
 ![1](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/e4c6e515-4a04-470a-b86c-89d8510195f0)
 
