@@ -13,7 +13,7 @@ public class testController {
 //
 //    @GetMapping("/")
 //    public String hello() {
-//        //System.out.println(medicineRepository.findById(83787));
+//        System.out.println(medicineRepository.findById("83787"));
 //        return "index";
 //    }
 }

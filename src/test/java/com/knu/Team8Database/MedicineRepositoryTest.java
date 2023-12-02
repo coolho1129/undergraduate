@@ -17,10 +17,10 @@ public class MedicineRepositoryTest {
     public void testCustomQuery() {
 
         // when
-        List<Detail_view> medicineList = medicineRepository.findAll();
+        List<Detail_view> medicineList = medicineRepository.find_detail();
 
         // then
         Detail_view medicines = medicineList.get(0);
 
-        System.out.println(medicines);
+        System.out.println(medicines.getMedicineId());
     }}

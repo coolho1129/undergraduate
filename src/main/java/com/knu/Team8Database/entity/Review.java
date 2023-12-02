@@ -20,7 +20,7 @@ public class Review {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "medicineId", nullable = false)
+    @JoinColumn(name = "medicine_id", nullable = false)
     private Detail_view detail_view;
 
     @ManyToOne
