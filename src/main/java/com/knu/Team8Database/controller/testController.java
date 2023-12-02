@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class testController {
 
-    private final MedicineRepository medicineRepository;
-
-    @GetMapping("/")
-    public String hello() {
-        System.out.println(medicineRepository.findById(83787));
-        return "index";
-    }
+//    private final MedicineRepository medicineRepository;
+//
+//    @GetMapping("/")
+//    public String hello() {
+//        //System.out.println(medicineRepository.findById(83787));
+//        return "index";
+//    }
 }

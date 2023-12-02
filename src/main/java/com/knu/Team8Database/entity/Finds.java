@@ -16,7 +16,7 @@ public class Finds {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "medicine_id", nullable = false)
-    private Medicine medicine;
+    @JoinColumn(name = "medicineId", nullable = false)
+    private Detail_view detail_view;
 
 }

@@ -1,5 +1,5 @@
 package com.knu.Team8Database;
-import com.knu.Team8Database.entity.Medicine;
+import com.knu.Team8Database.entity.Detail_view;
 import com.knu.Team8Database.repository.MedicineRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,10 @@ public class MedicineRepositoryTest {
     public void testCustomQuery() {
 
         // when
-        List<String> medicineList = medicineRepository.findMedicine();
+        List<Detail_view> medicineList = medicineRepository.findAll();
 
         // then
-        String medicines = medicineList.get(0);
-        // assertThat(medicines .getName());
+        Detail_view medicines = medicineList.get(0);
 
-        System.out.println(medicineList);
+        System.out.println(medicines);
     }}
