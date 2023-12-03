@@ -66,7 +66,7 @@
   </div>
   <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
     <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-      <a href="main.html" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
+      <a href="/main" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
@@ -100,11 +100,12 @@
             <td class="py-2 px-4 border-b">test</td>
             <td class="py-2 px-4 border-b">test</td>
           </tr>
-          <tr th:each="item : ${medicineList}" onclick="redirectToDetailPage('${item['medicine_id']}')" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
-            <td th:text="${item['name']}" class="py-2 px-4 border-b"></td>
-            <td th:text="${item['symptom']}" class="py-2 px-4 border-b"></td>
-            <td th:text="${item['capacity']}" class="py-2 px-4 border-b"></td>
-            <td th:text="${item['company']}" class="py-2 px-4 border-b"></td>
+          <tr th:each="item : ${responseData}"
+              th:mId="${item.key}" th:onclick="redirectToDetailPage(this.getAttribute('mId'))" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
+            <td th:text="${item.value.medicineName}" class="py-2 px-4 border-b"></td>
+            <td th:text="${item.value.symptoms}" class="py-2 px-4 border-b"></td>
+            <td th:text="${item.value.medicineCapacity}" class="py-2 px-4 border-b"></td>
+            <td th:text="${item.value.companyName}" class="py-2 px-4 border-b"></td>
           </tr>
           </tbody>
         </table>
