@@ -1,5 +1,6 @@
 package com.knu.Team8Database.repository;
 
+import com.knu.Team8Database.dto.ReviewDTO;
 import com.knu.Team8Database.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -26,15 +27,15 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
-    @Query("SELECT D.medicineName, U.name, R.rating, R.comments " +
+    @Query("SELECT D.medicineName as medicineName, U.name as userName, R.rating as rating, R.comments as comments " +
             "FROM Review R, User U, Detail_view D"
     )
-    List<Review> findAllReview();
+    List<ReviewDTO> findAllReview();
 
-    @Query("SELECT U.name, R.rating, R.comments " +
+    @Query("SELECT U.name as userName, R.rating as rating, R.comments as comments " +
             "FROM Review R, User U, Detail_view D " +
             "WHERE (:medicine_id IS NULL OR D.medicineId = :medicine_id)"
     )
-    List<Review> findMedicineReview(@Param("medicine_id") String medicine_id);
+    List<ReviewDTO> findMedicineReview(@Param("medicine_id") String medicine_id);
 
 }
