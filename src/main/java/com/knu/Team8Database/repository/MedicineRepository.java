@@ -1,7 +1,6 @@
 package com.knu.Team8Database.repository;
 
 import com.knu.Team8Database.dto.Detail_viewDTO;
-import com.knu.Team8Database.dto.Detail_viewDTO;
 import com.knu.Team8Database.entity.Detail_view;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,12 +14,10 @@ import java.util.List;
 @Repository
 public interface MedicineRepository extends JpaRepository<Detail_view, String> {
 
-
     @Query("SELECT DISTINCT D.medicineId, D.medicineName, D.medicineCapacity, D.medicinePrice, D.medicineManufactureDate, " +
         "D.companyName, D.companyPhoneNumber, D.companyWebsite, D.symtomName, D.symtomField, " +
         "D.componentName, D.componentSideEffects FROM Detail_view D " +
-        "WHERE (:medicine_id IS NULL OR D.medicineId = :medicine_id)"
-)
+        "WHERE (:medicine_id IS NULL OR D.medicineId = :medicine_id)")
     List<Detail_viewDTO> find_detail(@Param("medicine_id") String medicine_id);
 
     @Query("SELECT DISTINCT D.medicineId AS medicineId, D.medicineName AS medicineName, D.medicineCapacity AS medicineCapacity, D.symtomName AS symtomName, D.companyName AS companyName " +
@@ -33,5 +30,5 @@ public interface MedicineRepository extends JpaRepository<Detail_view, String> {
 
 
 
-}
+
 

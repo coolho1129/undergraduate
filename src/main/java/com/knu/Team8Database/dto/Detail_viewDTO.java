@@ -14,6 +14,3 @@ public interface Detail_viewDTO {
     String getComponentName();
     String getComponentSideEffects();
 }
-
-
-
