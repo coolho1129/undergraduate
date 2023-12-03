@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-
 @Table(name="detail_view")
 public class Detail_view {
 
