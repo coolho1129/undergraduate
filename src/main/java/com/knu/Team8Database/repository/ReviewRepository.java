@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ import java.util.List;
 //        - 많이 찾은 제품
 //        - response: find횟수, medicine_id, 의약품명
 
+@Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
     @Query("SELECT D.medicineName, U.name, R.rating, R.comments " +
             "FROM Review R, User U, Detail_view D"
