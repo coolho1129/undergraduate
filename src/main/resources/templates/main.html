@@ -66,7 +66,7 @@
   </div>
   <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
     <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-      <a href="main.html" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
+      <a href="/main" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
       <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
@@ -83,25 +83,28 @@
       </div>
 
       <!-- Search Form -->
-      <form class="w-full">
+      <form action="/search" method="post" class="w-full">
         <div class="flex w-full shadow">
           <div class="flex-1 bg-white justify-start p-6">
             <div class="flex mb-4">
               <label for="medicine" class="text-right pr-4 font-medium">제품명</label>
               <div class="flex-1">
-                <textarea id="medicine" name="medicine" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="medicine" name="medicine"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
               <label for="company" class="text-right pr-4 font-medium">회사명</label>
               <div class="flex-1">
-                <textarea id="company" name="company" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="company" name="company"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
               <label for="field" class="text-right pr-4 font-medium">진료분과</label>
               <div class="flex-1">
-                <textarea id="field" name="field" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="field" name="field"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
           </div>
@@ -109,19 +112,22 @@
             <div class="flex mb-4">
               <label for="component" class="text-right pr-4 font-medium">성분명</label>
               <div class="flex-1">
-                <textarea id="component" name="component" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="component" name="component"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
-              <label for="capacity" class="text-right pr-4 font-medium">효능효과</label>
+              <label for="symptom" class="text-right pr-4 font-medium">효능효과</label>
               <div class="flex-1">
-                <textarea id="capacity" name="capacity" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="symptom" name="Symptom"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
               <label for="price" class="text-right pr-4 font-medium">가격</label>
               <div class="flex-1">
-                <textarea id="price" name="price" rows="1" class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                <input id="price" name="price" type="number"
+                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
           </div>
@@ -147,6 +153,5 @@
     <div class="uppercase pb-6">&copy; 2023-2 Database Team8</div>
   </div>
 </footer>
-
 </body>
 </html>
