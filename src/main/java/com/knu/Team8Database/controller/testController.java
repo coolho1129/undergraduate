@@ -6,12 +6,8 @@ import com.knu.Team8Database.repository.MedicineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-
-import static org.hibernate.sql.InFragment.NULL;
-
 @Controller
 @RequiredArgsConstructor
 public class testController {
@@ -20,10 +16,8 @@ public class testController {
 
     @GetMapping("/search")
     public String simple(Model model) {
-        List<Detail_view> medicineList = medicineRepository.find_simple("NULL");
-
-        Detail_view medicines = medicineList.get(0);
-        System.out.println(medicines.getMedicineId());
+        List<Detail_view> medicineList = medicineRepository.find_simple();
+        System.out.println(medicineList.get(0).getMedicineId());
         return "index";
     }
 }
