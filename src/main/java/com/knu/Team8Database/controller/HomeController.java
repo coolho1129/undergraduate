@@ -9,4 +9,9 @@ public class HomeController {
     public String main() {
         return "main";
     }
+
+    @GetMapping("/member-info")
+    public String member() {
+        return "member_info";
+    }
 }

@@ -29,13 +29,13 @@
 
         <nav>
             <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
-                <li><a class="hover:text-gray-200 hover:underline px-4" href="login.html">로그인</a></li>
-                <li><a class="hover:text-gray-200 hover:underline px-4" href="signin.html">회원가입</a></li>
+                <li><a class="hover:text-gray-200 hover:underline px-4" href="/login">로그인</a></li>
+                <li><a class="hover:text-gray-200 hover:underline px-4" href="/signin">회원가입</a></li>
             </ul>
         </nav>
 
         <div class="flex items-center font-bold text-sm no-underline text-white pr-6">
-            <a class="hover:text-gray-200 px-4" href="main.html">약++</a>
+            <a class="hover:text-gray-200 px-4" href="/main">약++</a>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
 <!-- Text Header -->
 <header class="w-full container mx-auto">
     <div class="flex flex-col items-center py-12">
-        <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="main.html">
+        <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="/main">
             약 ++
         </a>
         <p class="text-lg text-gray-600 mt-4">
@@ -66,10 +66,10 @@
     </div>
     <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
         <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            <a href="main.html" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
+            <a href="/main" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
+            <a href="/review" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
+            <a href="/finds" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
+            <a href="/member-info" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
         </div>
     </div>
 </nav>
@@ -87,37 +87,20 @@
                 <table class="w-full bg-white shadow my-10">
                     <thead>
                     <tr>
+                        <th class="py-2 px-4 border-b">검색 횟수</th>
                         <th class="py-2 px-4 border-b">의약품명</th>
-                        <th class="py-2 px-4 border-b">효능효과</th>
-                        <th class="py-2 px-4 border-b">용법/용량</th>
-                        <th class="py-2 px-4 border-b">제조회사</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr onclick="redirectToDetailPage('1')" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                        <td class="py-2 px-4 border-b">test</td>
-                        <td class="py-2 px-4 border-b">test</td>
-                        <td class="py-2 px-4 border-b">test</td>
-                        <td class="py-2 px-4 border-b">test</td>
-                    </tr>
-                    <tr th:each="item : ${medicineList}" onclick="redirectToDetailPage('${item['medicine_id']}')" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                        <td th:text="${item['name']}" class="py-2 px-4 border-b"></td>
-                        <td th:text="${item['symptom']}" class="py-2 px-4 border-b"></td>
-                        <td th:text="${item['capacity']}" class="py-2 px-4 border-b"></td>
-                        <td th:text="${item['company']}" class="py-2 px-4 border-b"></td>
+                    <tr th:each="item : ${findsMap}"
+                        th:mId="${item.key}" th:onclick="redirectToDetailPage(this.getAttribute('mId'))" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                        <td th:text="${item.value.findCount}" class="py-2 px-4 border-b"></td>
+                        <td th:text="${item.value.medicineName}" class="py-2 px-4 border-b"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
         </article>
-
-        <!-- Pagination -->
-        <div class="flex items-center py-8">
-            <a href="#" class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
-            <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center">2</a>
-            <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
-        </div>
     </section>
 </div>
 
@@ -133,7 +116,7 @@
 
 <script>
   function redirectToDetailPage(medicine_id) {
-     window.location.href = '/main?param=' + medicine_id;
+     window.location.href = '/search?param=' + medicine_id;
   }
 </script>
 
