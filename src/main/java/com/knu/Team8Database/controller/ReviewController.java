@@ -39,5 +39,14 @@ public class ReviewController {
         model.addAttribute("reviewList", reviewList);
         return "review_list";
     }
+
+    @PostMapping("/review")
+    public String saveReview(String rating, String comments, String medicineId, Model model) {
+        System.out.println(rating);
+        System.out.println(comments);
+        System.out.println(medicineId);
+
+        return "redirect:/search?param=" + medicineId;
+    }
 }
 
