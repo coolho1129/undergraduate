@@ -18,10 +18,11 @@ public class ReviewController {
     private final ReviewRepository reviewRepository;
 
     @GetMapping("/review")
-    public String showALLReview(Model model) {
+    public String showALLReview(@RequestParam(value="page", defaultValue = "1") int page, Model model) {
         List<ReviewDTO> reviewDTOList = reviewRepository.findAllReview();
         List<Map<String, String>> reviewList = new Vector<>();
-        for (ReviewDTO reviewDTO : reviewDTOList) {
+        for (int i = 0; i < 10; i++) {
+            ReviewDTO reviewDTO = reviewDTOList.get(i + 10*(page-1));
             Map<String, String> review = new HashMap<>();
             review.put("medicineId", reviewDTO.getMedicineId());
             review.put("userName", reviewDTO.getUsersName());
@@ -30,8 +31,10 @@ public class ReviewController {
             review.put("comments", reviewDTO.getReviewComments());
 
             reviewList.add(review);
-         }
+        }
 
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", reviewDTOList.size() / 10 + 1);
         model.addAttribute("reviewList", reviewList);
         return "review_list";
     }
