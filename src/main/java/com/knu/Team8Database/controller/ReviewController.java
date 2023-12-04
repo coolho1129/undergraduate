@@ -29,6 +29,7 @@ public class ReviewController {
             review.put("medicineName", reviewDTO.getMedicineName());
             review.put("rating", reviewDTO.getReviewRating());
             review.put("comments", reviewDTO.getReviewComments());
+            review.put("date", reviewDTO.getReviewDate());
 
             reviewList.add(review);
         }
