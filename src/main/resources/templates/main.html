@@ -92,47 +92,58 @@
         <div class="flex w-full shadow">
           <div class="flex-1 bg-white justify-start p-6">
             <div class="flex mb-4">
-              <label for="medicine" class="text-right pr-4 font-medium">제품명</label>
+              <label for="medicine" class="pt-1 text-right pr-4 font-medium">제품명</label>
               <div class="flex-1">
                 <input id="medicine" name="medicine"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                       class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
-              <label for="company" class="text-right pr-4 font-medium">회사명</label>
+              <label for="company" class="pt-1 text-right pr-4 font-medium">회사명</label>
               <div class="flex-1">
                 <input id="company" name="company"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                       class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
-              <label for="field" class="text-right pr-4 font-medium">진료분과</label>
+              <label for="field" class="pt-1 text-right pr-4 font-medium">진료분과</label>
               <div class="flex-1">
-                <input id="field" name="field"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                <select id="field" name="field"
+                        class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                  <option value="" selected disabled hidden></option>
+                  <option value="소화기내과">소화기내과</option>
+                  <option value="순환기내과">순환기내과</option>
+                  <option value="신경외과">신경외과</option>
+                  <option value="안과">안과</option>
+                  <option value="이비인후과">이비인후과</option>
+                  <option value="정신과">정신과</option>
+                  <option value="정형외과">정형외과</option>
+                  <option value="치과">치과</option>
+                  <option value="피부과">피부과</option>
+                </select>
               </div>
             </div>
           </div>
           <div class="flex-1 bg-white justify-start p-6">
             <div class="flex mb-4">
-              <label for="component" class="text-right pr-4 font-medium">성분명</label>
+              <label for="component" class="pt-1 text-right pr-4 font-medium">성분명</label>
               <div class="flex-1">
                 <input id="component" name="component"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                       class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
-              <label for="symptom" class="text-right pr-4 font-medium">효능효과</label>
+              <label for="symptom" class="pt-1 text-right pr-4 font-medium">효능효과</label>
               <div class="flex-1">
                 <input id="symptom" name="Symptom"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                       class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
             <div class="flex mb-4">
-              <label for="price" class="text-right pr-4 font-medium">가격</label>
+              <label for="price" class="pt-1 text-right pr-4 font-medium">가격</label>
               <div class="flex-1">
                 <input id="price" name="price" type="number"
-                       class="form-textarea w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                       class="p-1 w-full rounded-md border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
               </div>
             </div>
           </div>
