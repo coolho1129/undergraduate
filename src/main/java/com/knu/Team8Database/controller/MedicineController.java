@@ -3,7 +3,10 @@ package com.knu.Team8Database.controller;
 import com.knu.Team8Database.dto.Detail_viewDTO;
 import com.knu.Team8Database.dto.MedicineReq;
 import com.knu.Team8Database.dto.ReviewDTO;
+import com.knu.Team8Database.entity.Detail_view;
+import com.knu.Team8Database.entity.Finds;
 import com.knu.Team8Database.entity.Users;
+import com.knu.Team8Database.repository.FindsRepository;
 import com.knu.Team8Database.repository.MedicineRepository;
 import com.knu.Team8Database.repository.ReviewRepository;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +23,7 @@ public class MedicineController {
 
     private final MedicineRepository medicineRepository;
     private final ReviewRepository reviewRepository;
+    private final FindsRepository findsRepository;
 
     @GetMapping("/search")
     public String searchDetail(@RequestParam("param") String medicineId,
@@ -27,6 +31,13 @@ public class MedicineController {
         if (session.getAttribute("loginUser") != null) {
             Users loginUser = (Users) session.getAttribute("loginUser");
             model.addAttribute("loginUser", loginUser.getUsersId());
+
+            Detail_view medicine = medicineRepository.findByMedicineId(medicineId);
+            Finds finds = Finds.builder()
+                    .medicineId(medicine)
+                    .usersId(loginUser)
+                    .build();
+            findsRepository.save(finds);
         }
 
         List<Detail_viewDTO> medicineDetail = medicineRepository.find_detail(medicineId);

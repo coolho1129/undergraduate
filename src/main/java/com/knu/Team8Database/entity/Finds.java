@@ -1,14 +1,16 @@
 package com.knu.Team8Database.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "finds")
 @IdClass(Finds.FindsId.class)
@@ -29,8 +31,8 @@ public class Finds {
     @Getter
     @Setter
     public static class FindsId implements Serializable {
-        private Users usersId;
-        private Detail_view medicineId;
+        private String usersId;
+        private String medicineId;
 
         @Override
         public boolean equals(Object o) {
