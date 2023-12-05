@@ -1,11 +1,11 @@
 package com.knu.Team8Database.dto;
 
 public interface ReviewDTO {
+
+    String getMedicineId();
     String getMedicineName();
-    String getUserName();
-    String getRating();
-    String getComments();
+    String getUsersName();
+    String getReviewRating();
+    String getReviewComments();
+    String getReviewDate();
 }
-
-
-

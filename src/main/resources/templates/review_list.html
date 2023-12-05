@@ -28,14 +28,19 @@
   <div class="w-full container mx-auto flex flex-wrap items-center justify-between">
 
     <nav>
-      <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
-        <li><a class="hover:text-gray-200 hover:underline px-4" href="login.html">로그인</a></li>
-        <li><a class="hover:text-gray-200 hover:underline px-4" href="signin.html">회원가입</a></li>
+      <ul th:if="${loginUser}" class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+        <li>
+          <a class="hover:text-gray-200 hover:underline px-4" href="/logout">로그아웃</a>
+        </li>
+      </ul>
+      <ul th:unless="${loginUser}" class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+        <li><a class="hover:text-gray-200 hover:underline px-4" href="/login">로그인</a></li>
+        <li><a class="hover:text-gray-200 hover:underline px-4" href="/signin">회원가입</a></li>
       </ul>
     </nav>
 
     <div class="flex items-center font-bold text-sm no-underline text-white pr-6">
-      <a class="hover:text-gray-200 px-4" href="main.html">약++</a>
+      <a class="hover:text-gray-200 px-4" href="/main">약++</a>
     </div>
   </div>
 
@@ -44,7 +49,7 @@
 <!-- Text Header -->
 <header class="w-full container mx-auto">
   <div class="flex flex-col items-center py-12">
-    <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="main.html">
+    <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="/main">
       약 ++
     </a>
     <p class="text-lg text-gray-600 mt-4">
@@ -66,10 +71,10 @@
   </div>
   <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
     <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-      <a href="main.html" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
-      <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
-      <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
-      <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
+      <a href="/main" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">의약품 검색</a>
+      <a href="/review" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">리뷰</a>
+      <a href="/finds" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">많이 찾은 제품</a>
+      <a href="/member-info" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">팀 소개</a>
     </div>
   </div>
 </nav>
@@ -87,30 +92,30 @@
         <table class="w-full bg-white shadow my-10">
           <thead>
           <tr>
-            <th class="py-2 px-4 border-b">사용자명</th>
+            <th class="w-1/6 py-2 px-4 border-b">사용자명</th>
             <th class="py-2 px-4 border-b">의약품명</th>
             <th class="py-2 px-4 border-b">별점</th>
             <th class="py-2 px-4 border-b">평가 내용</th>
+            <th class="w-1/6 py-2 px-4 border-b">작성 일자</th>
           </tr>
           </thead>
           <tbody>
-          <tr onclick="redirectToDetailPage('1')" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
-            <td class="py-2 px-4 border-b text-center">test</td>
-            <td class="w-1/4 py-2 px-4 border-b text-center">test</td>
-            <td class="py-2 px-4 border-b text-center">☆★★★★</td>
-            <td class="py-2 px-4 border-b text-center dynamic-text">내용을진진짜짜 많이 넣으면 어떻게 될까가가각ㄱ가가가가가가가가우우우우아가ㅏㅇ가아강ㄱ악아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
-          </tr>
-          <tr th:each="item : ${reviewList}" onclick="redirectToDetailPage('${item['medicine_id']}')" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
-            <td th:text="${item['user_name']}" class="py-2 px-4 border-b text-center"></td>
-            <td th:text="${item['medicine_name']}" class="w-1/4 py-2 px-4 border-b text-center"></td>
+          <tr th:each="item : ${reviewList}"
+              th:mId="${item.medicineId}" th:onclick="redirectToDetailPage(this.getAttribute('mId'))" class="cursor-pointer border-b hover:bg-gray-400 rounded py-2 px-4 mx-2">
+            <td th:text="${item.userName}" class="py-2 px-4 border-b text-center"></td>
+            <td th:text="${item.medicineName}" class="m-16 py-2 px-4 border-b text-center dynamic-text"></td>
 
-<!--            <td th:if="${review['rating'] == 1}" class="py-2 px-4 border-b text-center">☆☆☆☆★</td>-->
-<!--            <td th:if="${review['rating'] == 2}" class="w-1/4 py-2 px-4 border-b text-center">☆☆☆★★</td>-->
-<!--            <td th:if="${review['rating'] == 3}" class="py-2 px-4 border-b text-center">☆☆★★★</td>-->
-<!--            <td th:if="${review['rating'] == 4}" class="py-2 px-4 border-b text-center">☆★★★★</td>-->
-<!--            <td th:if="${review['rating'] == 5}" class="py-2 px-4 border-b text-center">★★★★★</td>-->
+            <span th:switch="${item.rating}">
+              <td th:case="'1'" class="py-2 px-4 border-b text-center">★☆☆☆☆</td>
+              <td th:case="'2'" class="py-2 px-4 border-b text-center">★★☆☆☆</td>
+              <td th:case="'3'" class="py-2 px-4 border-b text-center">★★★☆☆</td>
+              <td th:case="'4'" class="py-2 px-4 border-b text-center">★★★★☆</td>
+              <td th:case="'5'" class="py-2 px-4 border-b text-center">★★★★★</td>
+              <td th:case="*" class="py-2 px-4 border-b text-center">☆☆☆☆☆</td>
+            </span>
 
-            <td th:text="${item['comment']}" class="py-2 px-4 border-b dynamic-text"></td>
+            <td th:text="${item.comments}" class="py-2 px-4 border-b dynamic-text"></td>
+            <td th:text="${item.date}" class="py-2 px-4 text-center border-b"></td>
           </tr>
           </tbody>
         </table>
@@ -120,9 +125,26 @@
 
     <!-- Pagination -->
     <div class="flex items-center py-8">
-      <a href="#" class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
-      <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center">2</a>
-      <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
+      <!-- 이전 버튼 -->
+      <span th:if="${currentPage > 1}">
+        <a class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center mr-6"
+           th:href="@{/review(page=${currentPage - 1})}"><i class="fas fa-arrow-left mr-2"></i>  Previous</a>
+      </span>
+
+      <!-- 페이지 버튼 -->
+      <span th:each="i : ${#numbers.sequence(currentPage - 4, currentPage + 5)}"
+            th:if="${i > 0 and i <= totalPages}">
+        <a th:if="${currentPage == i}" class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center"
+           th:href="@{/review(page=${i})}" th:text="${i}"></a>
+        <a th:unless="${currentPage == i}" class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center"
+           th:href="@{/review(page=${i})}" th:text="${i}"></a>
+      </span>
+
+      <!-- 다음 버튼 -->
+      <span th:if="${currentPage < totalPages}">
+        <a class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3"
+           th:href="@{/review(page=${currentPage + 1})}">Next <i class="fas fa-arrow-right ml-2"></i></a>
+      </span>
     </div>
   </section>
 </div>
@@ -139,12 +161,12 @@
 
 <script>
   function redirectToDetailPage(medicine_id) {
-     window.location.href = '/main?param=' + medicine_id;
+     window.location.href = '/search?param=' + medicine_id;
   }
 
   document.addEventListener('DOMContentLoaded', function () {
                 var dynamicTexts = document.querySelectorAll('.dynamic-text');
-                var maxLength = 30; // 원하는 최대 글자 수
+                var maxLength = 15; // 원하는 최대 글자 수
 
                 dynamicTexts.forEach(function (dynamicText) {
                     if (dynamicText.textContent.length > maxLength) {

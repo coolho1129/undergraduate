@@ -1,13 +1,15 @@
 package com.knu.Team8Database.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "review")
 public class Review {
@@ -17,24 +19,24 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Users usersId;
 
     @ManyToOne
     @JoinColumn(name = "medicine_id", nullable = false)
-    private Detail_view detail_view;
+    private Detail_view medicineId;
 
     @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)
-    private Admin admin;
+    private Admin adminId;
 
     @Column(name = "rating", nullable = false)
-    private Double rating;
+    private Double reviewRating;
 
     @Column(name = "review_date")
     @Temporal(TemporalType.DATE)
     private Date reviewDate;
 
     @Column(name = "comments", columnDefinition = "NVARCHAR2(50)")
-    private String comments;
+    private String reviewComments;
 
 }
