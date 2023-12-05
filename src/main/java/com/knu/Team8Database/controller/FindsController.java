@@ -2,7 +2,7 @@ package com.knu.Team8Database.controller;
 
 import com.knu.Team8Database.dto.FindsDTO;
 import com.knu.Team8Database.entity.Users;
-import com.knu.Team8Database.repository.FindsRepository;
+import com.knu.Team8Database.service.FindsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,8 @@ import java.util.*;
 @Controller
 @RequiredArgsConstructor
 public class FindsController {
-    private final FindsRepository findsRepository;
+
+    private final FindsService findsService;
 
     @GetMapping("/finds")
     public String showRanking(Model model, HttpSession session){
@@ -23,7 +24,7 @@ public class FindsController {
             model.addAttribute("loginUser", loginUser.getUsersId());
         }
 
-        List<FindsDTO> findsDTOList = findsRepository.findByTop5();
+        List<FindsDTO> findsDTOList = findsService.findsRanking();
         Map<String, Map<String, Object>> findsMap = new HashMap<>();
 
         for (int i = 0; i < 5; i++) {

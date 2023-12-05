@@ -4,11 +4,10 @@ import com.knu.Team8Database.dto.Detail_viewDTO;
 import com.knu.Team8Database.dto.MedicineReq;
 import com.knu.Team8Database.dto.ReviewDTO;
 import com.knu.Team8Database.entity.Detail_view;
-import com.knu.Team8Database.entity.Finds;
 import com.knu.Team8Database.entity.Users;
-import com.knu.Team8Database.repository.FindsRepository;
-import com.knu.Team8Database.repository.MedicineRepository;
-import com.knu.Team8Database.repository.ReviewRepository;
+import com.knu.Team8Database.service.FindsService;
+import com.knu.Team8Database.service.MedicineService;
+import com.knu.Team8Database.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class MedicineController {
 
-    private final MedicineRepository medicineRepository;
-    private final ReviewRepository reviewRepository;
-    private final FindsRepository findsRepository;
+    private final MedicineService medicineService;
+    private final ReviewService reviewService;
+    private final FindsService findsService;
 
     @GetMapping("/search")
     public String searchDetail(@RequestParam("param") String medicineId,
@@ -32,67 +31,14 @@ public class MedicineController {
             Users loginUser = (Users) session.getAttribute("loginUser");
             model.addAttribute("loginUser", loginUser.getUsersId());
 
-            Detail_view medicine = medicineRepository.findByMedicineId(medicineId);
-            Finds finds = Finds.builder()
-                    .medicineId(medicine)
-                    .usersId(loginUser)
-                    .build();
-            findsRepository.save(finds);
+            Detail_view medicine = medicineService.findByMedicineId(medicineId);
+            findsService.findsMedicine(medicine, loginUser);
         }
 
-        List<Detail_viewDTO> medicineDetail = medicineRepository.find_detail(medicineId);
-        Map<String,Map<String, Object>> itemMap = new HashMap<>();
+        Map<String, Object> medicine = medicineService.findDetailByMedicineId(medicineId);
+        model.addAttribute("responseData", medicine);
 
-        for(int i = 0; i< medicineDetail.size(); i++) {
-            Detail_viewDTO medicine = medicineDetail.get(i);
-
-            String medicineName = medicine.getMedicineName();
-            String medicineCapacity = medicine.getMedicineCapacity();
-            String medicinePrice = medicine.getMedicinePrice();
-            String medicineManufactureDate = medicine.getMedicineManufactureDate();
-            String symptomName = medicine.getSymtomName();
-            String symptomField = medicine.getSymtomField();
-            String companyName = medicine.getCompanyName();
-            String companyPhoneNumber = medicine.getCompanyPhoneNumber();
-            String companyWebsite = medicine.getCompanyWebsite();
-            String componentName = medicine.getComponentName();
-            String componentSideEffect = medicine.getComponentSideEffects();
-
-            if(itemMap.containsKey(medicineId)){
-                Map<String, Object> innerMap = itemMap.get(medicineId);
-                ((Set<String>) innerMap.get("symptoms")).add(symptomName);
-                ((Set<String>) innerMap.get("symptomFields")).add(symptomField);
-                ((Set<String>) innerMap.get("components")).add(componentName);
-                ((Set<String>) innerMap.get("componentSideEffects")).add(componentSideEffect);
-            }
-            else{
-                Map<String, Object> innerMap = new HashMap<>();
-                Set<String> symptoms = new HashSet();
-                Set<String> symptomFields = new HashSet();
-                Set<String> components = new HashSet();
-                Set<String> componentSideEffects = new HashSet();
-                symptoms.add(symptomName);
-                symptomFields.add(symptomField);
-                components.add(componentName);
-                componentSideEffects.add(componentSideEffect);
-
-                innerMap.put("symptoms", symptoms);
-                innerMap.put("symptomFields", symptomFields);
-                innerMap.put("components", components);
-                innerMap.put("componentSideEffects", componentSideEffects);
-                innerMap.put("medicineName", medicineName);
-                innerMap.put("medicineCapacity", medicineCapacity);
-                innerMap.put("medicinePrice", medicinePrice);
-                innerMap.put("medicineManufactureDate", medicineManufactureDate);
-                innerMap.put("companyName", companyName);
-                innerMap.put("companyPhoneNumber", companyPhoneNumber);
-                innerMap.put("companyWebsite", companyWebsite);
-                itemMap.put(medicineId, innerMap);
-            }
-        }
-        model.addAttribute("responseData", itemMap);
-
-        List<ReviewDTO> reviewDTOList = reviewRepository.findMedicineReview(medicineId);
+        List<ReviewDTO> reviewDTOList = reviewService.findAllByMedicineId(medicineId);
         List<Map<String, String>> reviewData = new Vector<>();
 
         for (ReviewDTO reviewDTO : reviewDTOList) {
@@ -117,11 +63,7 @@ public class MedicineController {
             model.addAttribute("loginUser", loginUser.getUsersId());
         }
 
-        if (medicineReq.getPrice().equals("")) medicineReq.setPrice("0");
-
-        List<Detail_viewDTO> medicineList = medicineRepository.find_simple(
-                medicineReq.getMedicine(),medicineReq.getComponent(),medicineReq.getSymptom(),
-                medicineReq.getCompany(),Integer.parseInt(medicineReq.getPrice()), medicineReq.getField());
+        List<Detail_viewDTO> medicineList = medicineService.findAllByItems(medicineReq);
 
         Map<String,Map<String, Object>> itemMap = new HashMap<>();
         for(int i = 0; i< medicineList.size(); i++) {

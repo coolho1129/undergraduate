@@ -3,6 +3,7 @@ package com.knu.Team8Database.controller;
 import com.knu.Team8Database.dto.UserReq;
 import com.knu.Team8Database.entity.Users;
 import com.knu.Team8Database.repository.UserRepository;
+import com.knu.Team8Database.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private HttpSession httpSession;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String loginPage(HttpSession session) {
@@ -30,7 +29,7 @@ public class UserController {
     public String login(String userId, String password,
                         HttpServletRequest request, Model model) {
 
-        Users loginUser = userRepository.findByUsersId(userId);
+        Users loginUser = userService.findByUsersId(userId);
         if (loginUser == null) {
             model.addAttribute("loginFail", "존재하지 않는 사용자입니다.");
             return "login";
@@ -60,15 +59,7 @@ public class UserController {
 
     @PostMapping("/signin")
     public String signin(UserReq userReq, Model model) {
-        System.out.println(userReq.getBirth());
-        Users user = Users.builder()
-                .usersId(userReq.getUserId())
-                .usersName(userReq.getName())
-                .usersBirth(userReq.getBirth())
-                .usersPassword(userReq.getPassword())
-                .usersGender(userReq.getGender()).build();
-
-        userRepository.save(user);
+        userService.saveUser(userReq);
         return "login";
     }
 }

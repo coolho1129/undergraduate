@@ -13,5 +13,5 @@ public interface FindsRepository extends JpaRepository<Finds, String> {
             "JOIN Detail_view D ON F.medicineId = D " +
             "GROUP BY D.medicineId, D.medicineName " +
             "ORDER BY findCount DESC")
-    List<FindsDTO> findByTop5();
+    List<FindsDTO> findsRanking();
 }

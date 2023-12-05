@@ -6,6 +6,8 @@ import com.knu.Team8Database.repository.AdminRepository;
 import com.knu.Team8Database.repository.MedicineRepository;
 import com.knu.Team8Database.repository.ReviewRepository;
 import com.knu.Team8Database.repository.UserRepository;
+import com.knu.Team8Database.service.MedicineService;
+import com.knu.Team8Database.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,8 @@ import java.util.*;
 @Controller
 @RequiredArgsConstructor
 public class ReviewController {
-    private final ReviewRepository reviewRepository;
-    private final MedicineRepository medicineRepository;
-    private final AdminRepository adminRepository;
-    private final UserRepository userRepository;
+    private final ReviewService reviewService;
+    private final MedicineService medicineService;
 
     @GetMapping("/review")
     public String showALLReview(@RequestParam(value="page", defaultValue = "1") int page,
@@ -30,7 +30,7 @@ public class ReviewController {
             model.addAttribute("loginUser", loginUser.getUsersId());
         }
 
-        List<ReviewDTO> reviewDTOList = reviewRepository.findAllReview();
+        List<ReviewDTO> reviewDTOList = reviewService.findAllReview();
         List<Map<String, String>> reviewList = new Vector<>();
         for (int i = 0; i < 10; i++) {
             ReviewDTO reviewDTO = reviewDTOList.get(i + 10*(page-1));
@@ -59,43 +59,11 @@ public class ReviewController {
             return "login";
         }
 
-        String generateReviewId;
-        String newReviewId;
         Users loginUser = (Users) session.getAttribute("loginUser");
-        Detail_view medicine = medicineRepository.findByMedicineId(medicineId);
+        Detail_view medicine = medicineService.findByMedicineId(medicineId);
 
-        do {
-            generateReviewId = generateRandomId();
-            newReviewId = reviewRepository.findReviewID(generateReviewId);
-        } while (newReviewId == null);
-
-        List<String> adminList = adminRepository.getAdminId();
-        Collections.shuffle(adminList);
-        Admin admin = adminRepository.findByAdminId(adminList.get(0));
-
-        Review review = Review.builder()
-                .reviewId(newReviewId)
-                .usersId(loginUser)
-                .medicineId(medicine)
-                .adminId(admin)
-                .reviewRating(rating)
-                .reviewDate(new Date())
-                .reviewComments(comments)
-                .build();
-
-        reviewRepository.save(review);
+        reviewService.saveReview(loginUser, medicine, rating, comments);
         return "redirect:/search?param=" + medicineId;
-    }
-
-    private String generateRandomId() {
-        int randomLength = new Random().nextInt(6) + 1; // 1에서 6 사이의 랜덤한 길이
-        StringBuilder randomId = new StringBuilder();
-
-        for (int i = 0; i < randomLength; i++) {
-            randomId.append(new Random().nextInt(10)); // 0에서 9 사이의 랜덤한 숫자
-        }
-
-        return randomId.toString();
     }
 }
 
