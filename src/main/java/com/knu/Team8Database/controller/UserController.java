@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -29,10 +28,11 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(String userId, String password,
-                        HttpServletRequest request) {
+                        HttpServletRequest request, Model model) {
 
         Users loginUser = userRepository.findByUsersId(userId);
         if (loginUser == null) {
+            model.addAttribute("loginFail", "존재하지 않는 사용자입니다.");
             return "login";
         }
         else if (loginUser.getUsersPassword().equals(password)) {
@@ -41,7 +41,10 @@ public class UserController {
 
             return "redirect:/main";
         }
-        else return "login";
+        else {
+            model.addAttribute("loginFail", "비밀번호가 틀렸습니다.");
+            return "login";
+        }
     }
 
     @GetMapping("/logout")
@@ -57,6 +60,7 @@ public class UserController {
 
     @PostMapping("/signin")
     public String signin(UserReq userReq, Model model) {
+        System.out.println(userReq.getBirth());
         Users user = Users.builder()
                 .usersId(userReq.getUserId())
                 .usersName(userReq.getName())

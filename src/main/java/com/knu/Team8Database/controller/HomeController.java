@@ -18,7 +18,11 @@ public class HomeController {
     }
 
     @GetMapping("/member-info")
-    public String member() {
+    public String member(Model model, HttpSession session) {
+        if (session.getAttribute("loginUser") != null) {
+            Users loginUser = (Users) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser.getUsersId());
+        }
         return "member_info";
     }
 }

@@ -41,4 +41,9 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
             "WHERE ( D.medicineId = :medicineId) " +
             "ORDER BY R.reviewDate DESC")
     List<ReviewDTO> findMedicineReview(@Param("medicineId") String medicineId);
+
+    @Query("SELECT R.reviewId as reviewID " +
+            "FROM Review R "+
+            "WHERE (R.reviewId =:reviewId)")
+    String findReviewID(@Param("reviewId") String reviewId);
 }

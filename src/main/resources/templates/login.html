@@ -75,5 +75,12 @@
         <div class="uppercase pb-6">&copy; 2023-2 Database Team8</div>
     </div>
 </footer>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const message = /*[[${loginFail}]]*/;
+    if (message != null) alert(message);
+    /*]]>*/
+</script>
 </body>
 </html>

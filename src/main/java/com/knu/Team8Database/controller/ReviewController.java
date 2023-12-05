@@ -6,6 +6,7 @@ import com.knu.Team8Database.repository.AdminRepository;
 import com.knu.Team8Database.repository.MedicineRepository;
 import com.knu.Team8Database.repository.ReviewRepository;
 import com.knu.Team8Database.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,13 @@ public class ReviewController {
     private final UserRepository userRepository;
 
     @GetMapping("/review")
-    public String showALLReview(@RequestParam(value="page", defaultValue = "1") int page, Model model) {
+    public String showALLReview(@RequestParam(value="page", defaultValue = "1") int page,
+                                Model model, HttpSession session) {
+        if (session.getAttribute("loginUser") != null) {
+            Users loginUser = (Users) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser.getUsersId());
+        }
+
         List<ReviewDTO> reviewDTOList = reviewRepository.findAllReview();
         List<Map<String, String>> reviewList = new Vector<>();
         for (int i = 0; i < 10; i++) {
@@ -45,16 +52,30 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public String saveReview(
-            Double rating, String comments, String medicineId, Model model
-    ) {
-        Users user = userRepository.findByUsersId("mXww86wy");
+    public String saveReview(Double rating, String comments, String medicineId,
+                             Model model, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            model.addAttribute("loginFail", "로그인 후 이용 가능합니다.");
+            return "login";
+        }
+
+        String generateReviewId;
+        String newReviewId;
+        Users loginUser = (Users) session.getAttribute("loginUser");
         Detail_view medicine = medicineRepository.findByMedicineId(medicineId);
-        Admin admin = adminRepository.findByAdminId("xsiI32Xo");
+
+        do {
+            generateReviewId = generateRandomId();
+            newReviewId = reviewRepository.findReviewID(generateReviewId);
+        } while (newReviewId == null);
+
+        List<String> adminList = adminRepository.getAdminId();
+        Collections.shuffle(adminList);
+        Admin admin = adminRepository.findByAdminId(adminList.get(0));
 
         Review review = Review.builder()
-                .reviewId("00000")
-                .usersId(user)
+                .reviewId(newReviewId)
+                .usersId(loginUser)
                 .medicineId(medicine)
                 .adminId(admin)
                 .reviewRating(rating)
@@ -64,6 +85,17 @@ public class ReviewController {
 
         reviewRepository.save(review);
         return "redirect:/search?param=" + medicineId;
+    }
+
+    private String generateRandomId() {
+        int randomLength = new Random().nextInt(6) + 1; // 1에서 6 사이의 랜덤한 길이
+        StringBuilder randomId = new StringBuilder();
+
+        for (int i = 0; i < randomLength; i++) {
+            randomId.append(new Random().nextInt(10)); // 0에서 9 사이의 랜덤한 숫자
+        }
+
+        return randomId.toString();
     }
 }
 

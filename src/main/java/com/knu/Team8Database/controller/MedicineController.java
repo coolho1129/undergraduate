@@ -3,8 +3,10 @@ package com.knu.Team8Database.controller;
 import com.knu.Team8Database.dto.Detail_viewDTO;
 import com.knu.Team8Database.dto.MedicineReq;
 import com.knu.Team8Database.dto.ReviewDTO;
+import com.knu.Team8Database.entity.Users;
 import com.knu.Team8Database.repository.MedicineRepository;
 import com.knu.Team8Database.repository.ReviewRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,13 @@ public class MedicineController {
     private final ReviewRepository reviewRepository;
 
     @GetMapping("/search")
-    public String searchDetail(@RequestParam("param") String medicineId, Model model) {
+    public String searchDetail(@RequestParam("param") String medicineId,
+                               Model model, HttpSession session) {
+        if (session.getAttribute("loginUser") != null) {
+            Users loginUser = (Users) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser.getUsersId());
+        }
+
         List<Detail_viewDTO> medicineDetail = medicineRepository.find_detail(medicineId);
         Map<String,Map<String, Object>> itemMap = new HashMap<>();
 
@@ -91,7 +99,13 @@ public class MedicineController {
     }
 
     @PostMapping("/search")
-    public String searchMedicine(MedicineReq medicineReq, Model model) {
+    public String searchMedicine(MedicineReq medicineReq,
+                                 Model model, HttpSession session) {
+        if (session.getAttribute("loginUser") != null) {
+            Users loginUser = (Users) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser.getUsersId());
+        }
+
         if (medicineReq.getPrice().equals("")) medicineReq.setPrice("0");
 
         List<Detail_viewDTO> medicineList = medicineRepository.find_simple(
