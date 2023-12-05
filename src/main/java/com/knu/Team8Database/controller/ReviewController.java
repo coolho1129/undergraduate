@@ -1,21 +1,25 @@
 package com.knu.Team8Database.controller;
 
 import com.knu.Team8Database.dto.ReviewDTO;
+import com.knu.Team8Database.entity.*;
+import com.knu.Team8Database.repository.AdminRepository;
+import com.knu.Team8Database.repository.MedicineRepository;
 import com.knu.Team8Database.repository.ReviewRepository;
+import com.knu.Team8Database.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewRepository reviewRepository;
+    private final MedicineRepository medicineRepository;
+    private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
 
     @GetMapping("/review")
     public String showALLReview(@RequestParam(value="page", defaultValue = "1") int page, Model model) {
@@ -41,11 +45,24 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public String saveReview(String rating, String comments, String medicineId, Model model) {
-        System.out.println(rating);
-        System.out.println(comments);
-        System.out.println(medicineId);
+    public String saveReview(
+            Double rating, String comments, String medicineId, Model model
+    ) {
+        Users user = userRepository.findByUsersId("mXww86wy");
+        Detail_view medicine = medicineRepository.findByMedicineId(medicineId);
+        Admin admin = adminRepository.findByAdminId("xsiI32Xo");
 
+        Review review = Review.builder()
+                .reviewId("00000")
+                .usersId(user)
+                .medicineId(medicine)
+                .adminId(admin)
+                .reviewRating(rating)
+                .reviewDate(new Date())
+                .reviewComments(comments)
+                .build();
+
+        reviewRepository.save(review);
         return "redirect:/search?param=" + medicineId;
     }
 }
