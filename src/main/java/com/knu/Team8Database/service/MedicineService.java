@@ -75,10 +75,13 @@ public class MedicineService {
     @Transactional(readOnly = true)
     public List<Detail_viewDTO> findAllByItems(MedicineReq items) {
         if (items.getPrice().equals("")) items.setPrice("0");
+        if (items.getField() == null) items.setField("");
 
         List<Detail_viewDTO> medicineList = medicineRepository.find_simple(
                 items.getMedicine(),items.getComponent(),items.getSymptom(),
                 items.getCompany(),Integer.parseInt(items.getPrice()), items.getField());
+
+        System.out.println(medicineList);
 
         return medicineList;
     }
