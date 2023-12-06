@@ -11,6 +11,5 @@ public interface AdminRepository extends JpaRepository<Admin, String> {
 
     Admin findByAdminId(String adminId);
 
-    @Query("SELECT A.adminId AS adminID FROM Admin AS A")
-    List<String> getAdminId();
+
 }
