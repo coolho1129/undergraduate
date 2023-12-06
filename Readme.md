@@ -35,6 +35,7 @@ To build and run the project, follow these steps:
        1.1.1 ID, Password, 이름, 생년월일, 성별 입력
    1.2 로그인
        1.2.1 아이디, 패스워드 입력
+
 2. 사용자
    2.1 검색
        2.1.1 각 항목에 검색어를 입력한 후 검색 버튼을 클릭하면 해당 조건에 맞는 내용을 검색
