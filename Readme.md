@@ -3,30 +3,45 @@
 Collaborator: 김찬호, 송혜경, 하재현
 
 ## Project Description
-<!--✔ 프로젝트명--!>
-<b>프로젝트명: 약++</b></br></br>
+<b>✔ 프로젝트명:</b> 약++</br>
+<b>✔ 목적:</b> 사용자들이 일반 의약품을 올바르게 활용하고 남용하지 않도록 돕기 위해 일반의약품 검색 및 리뷰 서비스를 기획하였다.</br>
+<b>✔ 차별성:</b> 사용자들이 직접 약 사용 후기를 작성하는 환경을 제공하여 복용 경험을 손쉽게 공유할 수 있는 플랫폼을 구축하였다.</br>
+<b>✔ 사용된 기술:</b> Springboot, JPA, Oracle DB, HTML, Tailwindcss, JS</br></br>
 
-<!--✔ 어떤 프로젝트인지 소개 -->
-<b>목적: 사용자들이 일반 의약품을 올바르게 활용하고 남용하지 않도록 돕기 위해 일반의약품 검색 및 리뷰 서비스를 기획하였다.</b></br>
-
-<b>차별성: 사용자들이 직접 약 사용 후기를 작성하는 환경을 제공하여 복용 경험을 손쉽게 공유할 수 있는 플랫폼을 구축하였다.</br></br>
-
-<b>사용된 기술: spring-boot, oracle DB, JSP</br></br>
 ## Getting Started
-To get started with this project, you will need to have the following installed on your local machine:
+### 개발환경
 ```
-✔ JDK 17
-✔ Apache Maven 3.9.5
- 
+- windows 10, 11
+- oracle 19c
+- oracle SQL Developer
+- JDK 17
+- Apache Maven 3.9.5
 ```
-To build and run the project, follow these steps:
-1. Clone the repository: git clone https://github.com/sosschs9/2023_Database.git
-2. Navigate to the project directory: cd 2023_Database
-3. Build the project: mvn clean install
-4. Run the project: mvn spring-boot:run
-5. Access: Accessing via localhost:8080
+### 실행방법
+1. oracle 'team8' 스키마 생성
+```
+sqlplus sys/oracle as sysdba
+CREATE USER team8 IDENTIFIED by comp322;
+GRANT ALL PRIVILEGES to team8 IDENTIFIED BY comp322;
+```
+2. 테이블 생성 및 데이터 삽입
+```
+Team8-Phase2-1.sql의 create문 실행
+commit;
+Team8-Phase2-2.sql의 insert문 실행
+commit;
+Team8-Phase2-1.sql의 alter문 실행
+commit;
+```
+3. Team8-Phase4-view.sql 실행
+4. Clone the repository: git clone https://github.com/sosschs9/2023_Database.git
+5. Navigate to the project directory: cd 2023_Database
+6. Build the project: mvn clean install
+7. Run the project: mvn spring-boot:run
+8. Access: Accessing via localhost:8080/main
    
 ***You must include application.properties file in src/main/resources***
+</br>
 
 ## Feature Description
 ```
@@ -53,4 +68,4 @@ To build and run the project, follow these steps:
 ```
 
 ## Project Result
-✔ 시연영상 삽입
+[시연영상 바로가기](https://www.youtube.com/watch?v=stEhlrn09rg)
