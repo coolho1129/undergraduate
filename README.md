@@ -25,7 +25,7 @@ https://drive.google.com/drive/folders/1D570_D3uIRF1B7EIM6_m8eo8aKS8Nfi5?usp=dri
 
 ### CEIC 논문
 
-
+[KNUVI_CEIC2023.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/13610774/KNUVI_CEIC2023.pdf)
 
 ### UCWIT 논문
 
