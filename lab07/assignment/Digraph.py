@@ -253,8 +253,8 @@ def sap(g, aList, bList):
         queue.put((v,'a',0))
         if v in bList:
             return (v,0)
-    for b in bList:
-        queue.put((b,'b',0))
+    for v in bList:
+        queue.put((v,'b',0))
         
     sapLangth=math.inf
     scp=None
