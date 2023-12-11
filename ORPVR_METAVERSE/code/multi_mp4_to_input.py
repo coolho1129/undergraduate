@@ -1,8 +1,8 @@
+import os
+import cv2
+import argparse
 
-
-
-
-
+cap = cv2.VideoCapture()
 
 # MIV_mp4 폴더에서 각 폴더 경로 args로 받아서 mp4->input
 # def get_args():
