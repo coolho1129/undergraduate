@@ -22,7 +22,7 @@ GPNN_METAVERSE 폴더
 https://drive.google.com/drive/folders/1D570_D3uIRF1B7EIM6_m8eo8aKS8Nfi5?usp=drive_link
 
 ## 성과
-### sw 저작권 등
+### sw 저작권 등록
 [C-2023-060489_등록증_PR-2023-142-01-KR.pdf](https://github.com/coolho1129/Metaverse-Background-Research/files/13705260/C-2023-060489_._PR-2023-142-01-KR.pdf)
 
 ### CEIC 논문
