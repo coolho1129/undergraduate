@@ -4,7 +4,7 @@
 
 2023.9.1.~2023.12.31
 
-주제1. SegmentVR 기법을 활용하여 메타버스 비디오를 Retargeting하는 연구 진행
+주제1. ORPVR 프레임워크를 활용하여 메타버스 비디오를 Retargeting하는 연구 진행
 
 ORPVR_METAVERSE 폴더
 
