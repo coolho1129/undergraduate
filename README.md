@@ -17,7 +17,7 @@ GPNN_METAVERSE 폴더
 주제3. 연구 과정에서 메타버스 데이터를 위한 downscaling 코드 개발
 
 
-## 중간 연구 결과
+## 연구 결과
 
 https://drive.google.com/drive/folders/1D570_D3uIRF1B7EIM6_m8eo8aKS8Nfi5?usp=drive_link
 
