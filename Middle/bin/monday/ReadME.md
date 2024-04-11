@@ -1,5 +1,0 @@
-![2022 01 Java Programming 중간고사-월요일-1](https://user-images.githubusercontent.com/105068708/210260458-a4dff66e-be8c-44ff-a6b8-2658e19fedda.png)
-![2022 01 Java Programming 중간고사-월요일-2](https://user-images.githubusercontent.com/105068708/210260461-4bb56e4b-9793-4d67-8d0b-8b3f5880a389.png)
-![2022 01 Java Programming 중간고사-월요일-3](https://user-images.githubusercontent.com/105068708/210260465-c1f65e70-688e-434b-a8c2-9c14f6e51ba3.png)
-![2022 01 Java Programming 중간고사-월요일-4](https://user-images.githubusercontent.com/105068708/210260467-6d77185b-0bef-44d3-9fda-50addad745f2.png)
-![2022 01 Java Programming 중간고사-월요일-5](https://user-images.githubusercontent.com/105068708/210260469-5811e069-2146-48ec-8e33-c8bb0cbb8682.png)
