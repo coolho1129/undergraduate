@@ -3,9 +3,10 @@
 
 ## Down_resolution
 
-program.py 라고 가정함
-사용방법: python down_resolution.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]
-python program.py [input_media]
+**사용방법:** 
+```
+python down_resolution.py [-h] [-input INPUT] [-output OUTPUT] [-mode {FHD,HD,SD}] [-ratio RATIO]
+```
 
 ![1](https://github.com/coolho1129/Metaverse-Background-Research/assets/111948424/e4c6e515-4a04-470a-b86c-89d8510195f0)
 
