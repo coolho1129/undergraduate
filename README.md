@@ -64,6 +64,7 @@
 </a>
 
 <h3> 2024S (4학년 1학기)</h3>
-<img src="https://img.shields.io/badge/Deep Learning-AED581?style=for-the-badge&logo=python&logoColor=white">
-
+<a href="https://github.com/coolho1129/undergraduate/tree/main/DeepLearning">
+  <img src="https://img.shields.io/badge/Deep Learning-AED581?style=for-the-badge&logo=python&logoColor=white">
+</a>
 </div>
