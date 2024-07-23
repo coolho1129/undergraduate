@@ -13,12 +13,12 @@
 
 <h3> 2021F (1학년 2학기)</h3>
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Basic-Programming">
-<img src="https://img.shields.io/badge/Basic Programming-81C784?style=for-the-badge&logo=C&logoColor=white">
+<img src="https://img.shields.io/badge/Basic Programming-40E0D0?style=for-the-badge&logo=C&logoColor=white">
 </a>
 
 <h3> 2022S (2학년 1학기)</h3>
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Data-Structure">
-<img src="https://img.shields.io/badge/Data Structure-81C784?style=for-the-badge&logo=C&logoColor=white">
+<img src="https://img.shields.io/badge/Data Structure-40E0D0?style=for-the-badge&logo=C&logoColor=white">
 </a><br>
 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Java-Programming">
