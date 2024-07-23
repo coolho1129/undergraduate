@@ -26,6 +26,10 @@
 </a>
 
 <h3> 2022F (2학년 2학기)</h3>
+
+<a href="https://github.com/coolho1129/undergraduate/tree/main/RISC-V">
+<img src="https://img.shields.io/badge/RISC V-283272?style=for-the-badge&logo=risc-v&logoColor=white"></a><br>
+
 <a href="https://github.com/coolho1129/undergraduate/tree/main/System-Programming">
 <img src="https://img.shields.io/badge/System Programming-4FC3F7?style=for-the-badge&logo=C&logoColor=white"></a><br>
 
