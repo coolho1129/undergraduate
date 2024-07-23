@@ -6,7 +6,10 @@
 <img src="https://img.shields.io/badge/Interactive Programming-FFB74D?style=for-the-badge&logo=python&logoColor=white">
 </a>
   <br>
+
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Software-and-problem-solving">
 <img src="https://img.shields.io/badge/Software and problem solving-FF8A65?style=for-the-badge&logo=python&logoColor=white">
+</a>
 
 <h3> 2021F (1학년 2학기)</h3>
 <img src="https://img.shields.io/badge/Basic Programming-4DB6AC?style=for-the-badge&logo=C&logoColor=white">
