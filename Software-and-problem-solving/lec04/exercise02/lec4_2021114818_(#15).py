@@ -1,0 +1,15 @@
+import turtle
+turtle.shape('turtle')
+length=int(input('길이 : '))
+distance=int(input('간격 : '))
+turtle.forward(length+distance*0)
+turtle.up()
+turtle.goto(0,-distance*1)
+turtle.down()
+turtle.forward(length+distance*1)
+turtle.up()
+turtle.goto(0,-distance*2)
+turtle.down()
+turtle.forward(length+distance*2)
+
+turtle.mainloop()
