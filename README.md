@@ -13,6 +13,7 @@
 
 <h3> 2022S (2학년 1학기)</h3>
 <img src="https://img.shields.io/badge/Data Structure-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+<img src="https://img.shields.io/badge/Java Programming-FB923C?style=for-the-badge&logo=OpenJDK&logoColor=white">
 
 <h3> 2022F (2학년 2학기)</h3>
 <img src="https://img.shields.io/badge/System Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">><br>
