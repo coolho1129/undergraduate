@@ -1,0 +1,11 @@
+10 40 30 5 12 6 14 9 60
+
+Level order: 5 9 6 10 12 30 14 40 60
+Height: 4
+Leaf: 5
+
+66 234 2 5 30
+
+Level order: 2 5 66 234 30
+Height: 3
+Leaf: 3
