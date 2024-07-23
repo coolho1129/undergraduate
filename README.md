@@ -2,8 +2,10 @@
 <h2> 2021~2024 수업 과제 모음 </h2>
 
 <h3>2021S (1학년 1학기)</h3> 
-<a href="https://github.com/coolho1129/undergraduate/Interactive Programming">
-<img src="https://img.shields.io/badge/Interactive Programming-FFB74D?style=for-the-badge&logo=python&logoColor=white"><br>
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Interactive-Programming">
+<img src="https://img.shields.io/badge/Interactive Programming-FFB74D?style=for-the-badge&logo=python&logoColor=white">
+</a>
+  <br>
 <img src="https://img.shields.io/badge/Software and problem solving-FF8A65?style=for-the-badge&logo=python&logoColor=white">
 
 <h3> 2021F (1학년 2학기)</h3>
