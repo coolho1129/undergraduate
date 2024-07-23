@@ -1,0 +1,8 @@
+point cloud dataset 
+1. https://help.sketchup.com/en/scan-essentials-sketchup/sample-point-cloud-data
+그렇다할 객체가 없는 듯
+시각화할 방법을 아직 모르겠음. 
+2. https://github.com/ModelBunker/VoxelNet-PyTorch
+기존 data이 있을 것 같음.(추정) 
+3. https://github.com/nutonomy/second.pytorch
+2,3번은 실행해봐야 알 것 같음.
