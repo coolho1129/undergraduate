@@ -1,5 +1,5 @@
 <div align=center> 
-<h2> 2021~2024 수업 과제 모음 </h2>
+<h2> 2021-2024 과제 및 팀 프로젝트 모음 </h2>
 
 <h3>2021S (1학년 1학기)</h3> 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Interactive-Programming">
@@ -64,6 +64,7 @@
 </a>
 
 <h3> 2024S (4학년 1학기)</h3>
-<img src="https://img.shields.io/badge/Deep Learning-AED581?style=for-the-badge&logo=python&logoColor=white">
-
+<a href="https://github.com/coolho1129/undergraduate/tree/main/DeepLearning">
+  <img src="https://img.shields.io/badge/Deep Learning-AED581?style=for-the-badge&logo=python&logoColor=white">
+</a>
 </div>
