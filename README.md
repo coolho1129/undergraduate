@@ -1,4 +1,6 @@
+<div align=center> 
 <h2> 2021~2024 수업 과제 모음 </h2>
+
 
 <h3>2021S (1학년 1학기)</h3> 
 <img src="https://img.shields.io/badge/Interactive Programming-3776AB?style=for-the-badge&logo=python&logoColor=white">
@@ -24,14 +26,7 @@
 
 <h3> 2024S (4학년 1학기)</h3>
 
+</div>
 
 
 
-          <a href="https://github.com/CoolHo1129">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"><br>
-            <img src="https://img.shields.io/badge/Pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
-            <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
-            <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white"><br>
-            <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
-            <img src="https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white">
-          </a>
