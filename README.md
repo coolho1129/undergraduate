@@ -46,7 +46,7 @@
 <img src="https://img.shields.io/badge/Network Programming-FDD835?style=for-the-badge&logo=C&logoColor=white">
 </a><br>
   
-<a href="https://github.com/coolho1129/undergraduate/tree/main/Artificial-Intelligenc">
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Artificial-Intelligence">
 <img src="https://img.shields.io/badge/Artificial Intelligence-FF8A65?style=for-the-badge&logo=python&logoColor=white">
 </a>
 
@@ -59,6 +59,11 @@
 <img src="https://img.shields.io/badge/Algorithm2-4FC3F7?style=for-the-badge&logo=python&logoColor=white">
 </a><br>
 
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Capstone-Design-Project1">
+<img src="https://img.shields.io/badge/Capstone Design Project1-FF8A65?style=for-the-badge&logo=python&logoColor=white">
+</a>
+<br>
+
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Introduction-to-Machine-Learning">
 <img src="https://img.shields.io/badge/Introduction to Machine Learning-9575CD?style=for-the-badge&logo=python&logoColor=white">
 </a>
@@ -66,5 +71,9 @@
 <h3> 2024S (4학년 1학기)</h3>
 <a href="https://github.com/coolho1129/undergraduate/tree/main/DeepLearning">
   <img src="https://img.shields.io/badge/Deep Learning-AED581?style=for-the-badge&logo=python&logoColor=white">
+</a>
+<br>
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Capstone-Design-Project2">
+<img src="https://img.shields.io/badge/Capstone Design Project2-FF8A65?style=for-the-badge&logo=python&logoColor=white">
 </a>
 </div>
