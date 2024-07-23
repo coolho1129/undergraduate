@@ -6,16 +6,16 @@
 
 
 ### 2021F (1학년 2학기)
-<img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=Basic-Programming&logoColor=white">
+<img src="https://img.shields.io/badge/Basic Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
 
 ### 2022S (2학년 1학기)
-<img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=Data-Structure&logoColor=white">
+<img src="https://img.shields.io/badge/Data Structure-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
 
 ### 2022F (2학년 2학기)
-<img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=System-Programming&logoColor=white">
+<img src="https://img.shields.io/badge/System Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
 
 ### 2023S (3학년 1학기)
-<img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=Network-Programming&logoColor=white">
+<img src="https://img.shields.io/badge/Network Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
 
 ### 2023F (3학년 2학기)
 
