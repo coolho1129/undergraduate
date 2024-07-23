@@ -3,7 +3,7 @@
 
 
 <h3>2021S (1학년 1학기)</h3> 
-<img src="https://img.shields.io/badge/Interactive Programming-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Interactive Programming-3776AB?style=for-the-badge&logo=python&logoColor=white"><br>
 <img src="https://img.shields.io/badge/Software and problem solving-3776AB?style=for-the-badge&logo=python&logoColor=white">
 
 
@@ -15,10 +15,12 @@
 <img src="https://img.shields.io/badge/Data Structure-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
 
 <h3> 2022F (2학년 2학기)</h3>
-<img src="https://img.shields.io/badge/System Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+<img src="https://img.shields.io/badge/System Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">><br>
+<img src="https://img.shields.io/badge/Linear Algebra Programming Project-3776AB?style=for-the-badge&logo=python&logoColor=white">
+
 
 <h3> 2023S (3학년 1학기)</h3>
-<img src="https://img.shields.io/badge/Network Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+<img src="https://img.shields.io/badge/Network Programming-A8B9CC?style=for-the-badge&logo=C&logoColor=white">><br>
 <img src="https://img.shields.io/badge/Artificial Intelligence-3776AB?style=for-the-badge&logo=python&logoColor=white">
 
 <h3> 2023F (3학년 2학기)</h3>
