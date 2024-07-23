@@ -22,7 +22,7 @@
 <img src="https://img.shields.io/badge/Artificial Intelligence-3776AB?style=for-the-badge&logo=python&logoColor=white">
 
 <h3> 2023F (3학년 2학기)</h3>
-<img src="https://img.shields.io/badge/Software and problem solving-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Introduction to Machine Learning-3776AB?style=for-the-badge&logo=python&logoColor=white">
 
 <h3> 2024S (4학년 1학기)</h3>
 
