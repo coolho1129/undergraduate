@@ -1,0 +1,31 @@
+# file directory
+data/
+venv/
+Shiddenlayer/
+.idea/
+.ipynb_checkpoints/
+videos/
+alarm_system/frontend/node_modules/
+alarm_system/frontend/vite-project/
+alarm_system/frontend/package-lock.json
+
+# file
+*.pth
+*.pkl
+*.caffemodel
+*.csv
+*.log
+*.prototxt
+config.py
+test.py
+**/__pycache__
+
+
+# etc
+data_name.py
+*.zip
+source/
+source_1/
+*.gitignore
+
+
