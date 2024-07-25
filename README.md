@@ -46,6 +46,11 @@
 <img src="https://img.shields.io/badge/Algorithm1-6405F6?style=for-the-badge&logo=python&logoColor=white">
 </a><br>
 
+<a href="https://github.com/coolho1129/undergraduate/tree/main/Operating-System">
+<img src="https://img.shields.io/badge/Operating System-923939?style=for-the-badge&logo=C&logoColor=white">
+</a><br>
+
+
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Network-Programming">
 <img src="https://img.shields.io/badge/Network Programming-FD835?style=for-the-badge&logo=C&logoColor=white">
 </a><br>
