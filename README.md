@@ -27,13 +27,11 @@
 
 <h3> 2022F (2학년 2학기)</h3>
 
+<a href="https://github.com/coolho1129/undergraduate/tree/main/System-Programming">
+<img src="https://img.shields.io/badge/System Programming-FC3F0?style=for-the-badge&logo=C&logoColor=white"></a><br>
 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Computer-Architecture">
 <img src="https://img.shields.io/badge/Computer Architecture-283272?style=for-the-badge&logo=C&logoColor=white"></a><br>
-
-
-<a href="https://github.com/coolho1129/undergraduate/tree/main/System-Programming">
-<img src="https://img.shields.io/badge/System Programming-FC3F0?style=for-the-badge&logo=C&logoColor=white"></a><br>
 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Linear-Algebra-Programming-Project">
 <img src="https://img.shields.io/badge/Linear Algebra Programming Project-BA68C8?style=for-the-badge&logo=python&logoColor=white">
