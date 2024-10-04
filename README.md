@@ -29,7 +29,7 @@
 
 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/Computer-Architecture">
-<img src="https://img.shields.io/badge/Computer-Architecture-283272?style=for-the-badge&logo=C&logoColor=white"></a><br>
+<img src="https://img.shields.io/badge/Computer Architecture-283272?style=for-the-badge&logo=C&logoColor=white"></a><br>
 
 
 <a href="https://github.com/coolho1129/undergraduate/tree/main/System-Programming">
