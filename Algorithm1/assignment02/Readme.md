@@ -1,2 +1,2 @@
-![다운로드](https://github.com/coolho1129/Algorithm1/assets/105068708/8133b375-7179-4395-8ed3-fae10f35f657)
-![다운로드 (1)](https://github.com/coolho1129/Algorithm1/assets/105068708/0a9ec5a6-9be4-4f3d-ad5e-b3ba2a2f41c0)
+![assignment #1-page-004](https://github.com/user-attachments/assets/90dc8b61-a6ae-47f7-8d5d-9b90850dc1a8)
+![assignment #2-page-001](https://github.com/user-attachments/assets/9a77090f-6f20-4dc8-a853-7814f2f152d1)
